@@ -146,7 +146,8 @@ class MnistModel(LightningModule):
 
 
 def run_training_job():
-
+    import time
+    
     mnist_model = MnistModel()
 
     # Initialize a trainer (don't log anything since things get so slow...)
@@ -179,8 +180,7 @@ def run_training_job():
     logger.log_metrics({"num_params": num_params})
 
     logger.save()
-
-    import time
+    
     time.sleep(25)
     
     # Print outputs
