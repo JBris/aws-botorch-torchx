@@ -180,9 +180,12 @@ def run_training_job():
 
     logger.save()
 
+    import time
+    time.sleep(25)
+    
     # Print outputs
     print(f"train time: {train_time}, val acc: {val_accuracy}, num_params: {num_params}")
 
-
+    
 if __name__ == "__main__":
     run_training_job()
