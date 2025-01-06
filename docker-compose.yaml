@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+
+  torchx:
+    image: ghcr.io/jbris/torchx-aws-test:1.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile
