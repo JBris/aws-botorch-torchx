@@ -1,11 +1,11 @@
-Date: Mon, 6 Jan 2025 12:58:52 +0000 (UTC)
-Message-ID: <1022731609.75.1736168332759@afdf37af6514>
+Date: Mon, 6 Jan 2025 21:40:01 +0000 (UTC)
+Message-ID: <834089924.3.1736199601854@a1acf6ce7f9f>
 Subject: Exported From Confluence
 MIME-Version: 1.0
 Content-Type: multipart/related; 
-	boundary="----=_Part_74_170229025.1736168332758"
+	boundary="----=_Part_2_89532518.1736199601851"
 
-------=_Part_74_170229025.1736168332758
+------=_Part_2_89532518.1736199601851
 Content-Type: text/html; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 Content-Location: file:///C:/exported.html
@@ -234,12 +234,12 @@ d of the content */
     <h1>AWS training: BoTorch TorchX - Neural architecture search</h1>
     <div class=3D"Section1">
         <style type=3D"text/css">/*<![CDATA[*/
-div.rbtoc1736168329031 {padding: 0px;}
-div.rbtoc1736168329031 ul {list-style: none;margin-left: 0px;}
-div.rbtoc1736168329031 li {margin-left: 0px;padding-left: 0px;}
+div.rbtoc1736199598253 {padding: 0px;}
+div.rbtoc1736199598253 ul {list-style: none;margin-left: 0px;}
+div.rbtoc1736199598253 li {margin-left: 0px;padding-left: 0px;}
 
 /*]]>*/</style>
-<div class=3D"toc-macro rbtoc1736168329031">
+<div class=3D"toc-macro rbtoc1736199598253">
 <ul class=3D"toc-indentation">
 <li><a href=3D"#AWStraining:BoTorchTorchX-Neuralarchitecturesearch-EC2setup=
 (freetier)">EC2 setup (free tier)</a>
@@ -290,7 +290,7 @@ ource-id=3D"3381035095" data-linked-resource-version=3D"1" data-linked-reso=
 urce-type=3D"attachment" data-linked-resource-default-alias=3D"image-202501=
 06-101159.png" data-base-url=3D"https://plantandfood.atlassian.net/wiki" da=
 ta-linked-resource-content-type=3D"image/png" data-linked-resource-containe=
-r-id=3D"3380084738" data-linked-resource-container-version=3D"7" data-media=
+r-id=3D"3380084738" data-linked-resource-container-version=3D"8" data-media=
 -id=3D"a0090371-e183-4672-a770-1080dcab81a2" data-media-type=3D"file" heigh=
 t=3D"175"></span>
 <p></p><span class=3D"confluence-embedded-file-wrapper image-center-wrapper=
@@ -305,7 +305,7 @@ d=3D"3381035101" data-linked-resource-version=3D"1" data-linked-resource-ty=
 pe=3D"attachment" data-linked-resource-default-alias=3D"image-20250106-1013=
 40.png" data-base-url=3D"https://plantandfood.atlassian.net/wiki" data-link=
 ed-resource-content-type=3D"image/png" data-linked-resource-container-id=3D=
-"3380084738" data-linked-resource-container-version=3D"7" data-media-id=3D"=
+"3380084738" data-linked-resource-container-version=3D"8" data-media-id=3D"=
 d9e0ee03-3047-4877-95a8-35f4bc5d7e7d" data-media-type=3D"file" height=3D"18=
 2"></span>
 <p></p><span class=3D"confluence-embedded-file-wrapper image-center-wrapper=
@@ -320,7 +320,7 @@ d=3D"3381035108" data-linked-resource-version=3D"1" data-linked-resource-ty=
 pe=3D"attachment" data-linked-resource-default-alias=3D"image-20250106-1015=
 24.png" data-base-url=3D"https://plantandfood.atlassian.net/wiki" data-link=
 ed-resource-content-type=3D"image/png" data-linked-resource-container-id=3D=
-"3380084738" data-linked-resource-container-version=3D"7" data-media-id=3D"=
+"3380084738" data-linked-resource-container-version=3D"8" data-media-id=3D"=
 e8c5433a-7a2d-4c26-bda2-5644e5f3905c" data-media-type=3D"file" height=3D"16=
 8"></span>
 <p></p><span class=3D"confluence-embedded-file-wrapper image-center-wrapper=
@@ -335,7 +335,7 @@ d=3D"3381461008" data-linked-resource-version=3D"1" data-linked-resource-ty=
 pe=3D"attachment" data-linked-resource-default-alias=3D"image-20250106-1015=
 49.png" data-base-url=3D"https://plantandfood.atlassian.net/wiki" data-link=
 ed-resource-content-type=3D"image/png" data-linked-resource-container-id=3D=
-"3380084738" data-linked-resource-container-version=3D"7" data-media-id=3D"=
+"3380084738" data-linked-resource-container-version=3D"8" data-media-id=3D"=
 b862c2c0-6e83-47fa-86d0-aff75294ec38" data-media-type=3D"file" height=3D"20=
 5"></span>
 <p></p><span class=3D"confluence-embedded-file-wrapper image-center-wrapper=
@@ -350,7 +350,7 @@ d=3D"3381461020" data-linked-resource-version=3D"1" data-linked-resource-ty=
 pe=3D"attachment" data-linked-resource-default-alias=3D"image-20250106-1016=
 18.png" data-base-url=3D"https://plantandfood.atlassian.net/wiki" data-link=
 ed-resource-content-type=3D"image/png" data-linked-resource-container-id=3D=
-"3380084738" data-linked-resource-container-version=3D"7" data-media-id=3D"=
+"3380084738" data-linked-resource-container-version=3D"8" data-media-id=3D"=
 a728bb0a-d76b-4d53-9ee9-4cf119606bac" data-media-type=3D"file" height=3D"16=
 3"></span><span class=3D"confluence-embedded-file-wrapper image-center-wrap=
 per confluence-embedded-manual-size"><img class=3D"confluence-embedded-imag=
@@ -364,7 +364,7 @@ ata-width=3D"1511" data-unresolved-comment-count=3D"0" data-linked-resource=
 type=3D"attachment" data-linked-resource-default-alias=3D"image-20250106-10=
 1701.png" data-base-url=3D"https://plantandfood.atlassian.net/wiki" data-li=
 nked-resource-content-type=3D"image/png" data-linked-resource-container-id=
-=3D"3380084738" data-linked-resource-container-version=3D"7" data-media-id=
+=3D"3380084738" data-linked-resource-container-version=3D"8" data-media-id=
 =3D"b419fbb7-95f5-49b2-b1fa-9a77cd55f346" data-media-type=3D"file" height=
 =3D"179"></span>
 <p></p><span class=3D"confluence-embedded-file-wrapper image-center-wrapper=
@@ -379,7 +379,7 @@ d=3D"3380576321" data-linked-resource-version=3D"1" data-linked-resource-ty=
 pe=3D"attachment" data-linked-resource-default-alias=3D"image-20250106-1018=
 00.png" data-base-url=3D"https://plantandfood.atlassian.net/wiki" data-link=
 ed-resource-content-type=3D"image/png" data-linked-resource-container-id=3D=
-"3380084738" data-linked-resource-container-version=3D"7" data-media-id=3D"=
+"3380084738" data-linked-resource-container-version=3D"8" data-media-id=3D"=
 57a02dae-a196-4386-817e-02368f96800f" data-media-type=3D"file" height=3D"17=
 0"></span>
 <p></p><span class=3D"confluence-embedded-file-wrapper image-center-wrapper=
@@ -394,7 +394,7 @@ d=3D"3380674623" data-linked-resource-version=3D"1" data-linked-resource-ty=
 pe=3D"attachment" data-linked-resource-default-alias=3D"image-20250106-1018=
 49.png" data-base-url=3D"https://plantandfood.atlassian.net/wiki" data-link=
 ed-resource-content-type=3D"image/png" data-linked-resource-container-id=3D=
-"3380084738" data-linked-resource-container-version=3D"7" data-media-id=3D"=
+"3380084738" data-linked-resource-container-version=3D"8" data-media-id=3D"=
 5739482c-3e98-4699-8e92-de2216098995" data-media-type=3D"file" height=3D"17=
 0"></span>
 <p></p><span class=3D"confluence-embedded-file-wrapper image-center-wrapper=
@@ -409,7 +409,7 @@ d=3D"3380576328" data-linked-resource-version=3D"1" data-linked-resource-ty=
 pe=3D"attachment" data-linked-resource-default-alias=3D"image-20250106-1021=
 29.png" data-base-url=3D"https://plantandfood.atlassian.net/wiki" data-link=
 ed-resource-content-type=3D"image/png" data-linked-resource-container-id=3D=
-"3380084738" data-linked-resource-container-version=3D"7" data-media-id=3D"=
+"3380084738" data-linked-resource-container-version=3D"8" data-media-id=3D"=
 91f25742-5067-4063-8151-aa48fe402e0b" data-media-type=3D"file" height=3D"17=
 8"></span>
 <h2 id=3D"AWStraining:BoTorchTorchX-Neuralarchitecturesearch-Createjobqueue=
@@ -425,7 +425,7 @@ nked-resource-id=3D"3381461027" data-linked-resource-version=3D"1" data-lin=
 ked-resource-type=3D"attachment" data-linked-resource-default-alias=3D"imag=
 e-20250106-102448.png" data-base-url=3D"https://plantandfood.atlassian.net/=
 wiki" data-linked-resource-content-type=3D"image/png" data-linked-resource-=
-container-id=3D"3380084738" data-linked-resource-container-version=3D"7" da=
+container-id=3D"3380084738" data-linked-resource-container-version=3D"8" da=
 ta-media-id=3D"f67761ff-2cce-4677-b37a-f37fa0327c05" data-media-type=3D"fil=
 e" height=3D"186"></span>
 <p></p><span class=3D"confluence-embedded-file-wrapper image-center-wrapper=
@@ -440,7 +440,7 @@ d=3D"3381461033" data-linked-resource-version=3D"1" data-linked-resource-ty=
 pe=3D"attachment" data-linked-resource-default-alias=3D"image-20250106-1025=
 29.png" data-base-url=3D"https://plantandfood.atlassian.net/wiki" data-link=
 ed-resource-content-type=3D"image/png" data-linked-resource-container-id=3D=
-"3380084738" data-linked-resource-container-version=3D"7" data-media-id=3D"=
+"3380084738" data-linked-resource-container-version=3D"8" data-media-id=3D"=
 feb12603-f9b9-41d0-b9e8-51125b572f0e" data-media-type=3D"file" height=3D"17=
 9"></span>
 <p></p>
@@ -456,7 +456,7 @@ d=3D"3380216008" data-linked-resource-version=3D"1" data-linked-resource-ty=
 pe=3D"attachment" data-linked-resource-default-alias=3D"image-20250106-1026=
 56.png" data-base-url=3D"https://plantandfood.atlassian.net/wiki" data-link=
 ed-resource-content-type=3D"image/png" data-linked-resource-container-id=3D=
-"3380084738" data-linked-resource-container-version=3D"7" data-media-id=3D"=
+"3380084738" data-linked-resource-container-version=3D"8" data-media-id=3D"=
 25a4d51d-fbd1-4afe-a40d-ed52237b61bd" data-media-type=3D"file" height=3D"17=
 9"></span><span class=3D"confluence-embedded-file-wrapper image-center-wrap=
 per confluence-embedded-manual-size"><img class=3D"confluence-embedded-imag=
@@ -470,7 +470,7 @@ ata-width=3D"1506" data-unresolved-comment-count=3D"0" data-linked-resource=
 type=3D"attachment" data-linked-resource-default-alias=3D"image-20250106-10=
 2713.png" data-base-url=3D"https://plantandfood.atlassian.net/wiki" data-li=
 nked-resource-content-type=3D"image/png" data-linked-resource-container-id=
-=3D"3380084738" data-linked-resource-container-version=3D"7" data-media-id=
+=3D"3380084738" data-linked-resource-container-version=3D"8" data-media-id=
 =3D"c9500391-cee9-4329-aaff-ef4c7320262f" data-media-type=3D"file" height=
 =3D"179"></span><span class=3D"confluence-embedded-file-wrapper image-cente=
 r-wrapper confluence-embedded-manual-size"><img class=3D"confluence-embedde=
@@ -484,7 +484,7 @@ source-id=3D"3380576343" data-linked-resource-version=3D"1" data-linked-res=
 ource-type=3D"attachment" data-linked-resource-default-alias=3D"image-20250=
 106-102808.png" data-base-url=3D"https://plantandfood.atlassian.net/wiki" d=
 ata-linked-resource-content-type=3D"image/png" data-linked-resource-contain=
-er-id=3D"3380084738" data-linked-resource-container-version=3D"7" data-medi=
+er-id=3D"3380084738" data-linked-resource-container-version=3D"8" data-medi=
 a-id=3D"3445202e-7bc9-40c1-947d-d2b3a034b373" data-media-type=3D"file" heig=
 ht=3D"187"></span><span class=3D"confluence-embedded-file-wrapper image-cen=
 ter-wrapper confluence-embedded-manual-size"><img class=3D"confluence-embed=
@@ -498,7 +498,7 @@ d-resource-id=3D"3380674640" data-linked-resource-version=3D"1" data-linked=
 -resource-type=3D"attachment" data-linked-resource-default-alias=3D"image-2=
 0250106-102909.png" data-base-url=3D"https://plantandfood.atlassian.net/wik=
 i" data-linked-resource-content-type=3D"image/png" data-linked-resource-con=
-tainer-id=3D"3380084738" data-linked-resource-container-version=3D"7" data-=
+tainer-id=3D"3380084738" data-linked-resource-container-version=3D"8" data-=
 media-id=3D"1c904113-132a-46f5-9fd0-806ffc675e1b" data-media-type=3D"file" =
 height=3D"172"></span>
 <h2 id=3D"AWStraining:BoTorchTorchX-Neuralarchitecturesearch-Setuserpermiss=
@@ -515,7 +515,7 @@ d=3D"3380674659" data-linked-resource-version=3D"1" data-linked-resource-ty=
 pe=3D"attachment" data-linked-resource-default-alias=3D"image-20250106-1059=
 16.png" data-base-url=3D"https://plantandfood.atlassian.net/wiki" data-link=
 ed-resource-content-type=3D"image/png" data-linked-resource-container-id=3D=
-"3380084738" data-linked-resource-container-version=3D"7" data-media-id=3D"=
+"3380084738" data-linked-resource-container-version=3D"8" data-media-id=3D"=
 366f81c6-653a-4d8a-8c6a-a8fa47d5e603" data-media-type=3D"file" height=3D"17=
 6"></span><span class=3D"confluence-embedded-file-wrapper image-center-wrap=
 per confluence-embedded-manual-size"><img class=3D"confluence-embedded-imag=
@@ -529,7 +529,7 @@ ata-width=3D"1504" data-unresolved-comment-count=3D"0" data-linked-resource=
 type=3D"attachment" data-linked-resource-default-alias=3D"image-20250106-11=
 0146.png" data-base-url=3D"https://plantandfood.atlassian.net/wiki" data-li=
 nked-resource-content-type=3D"image/png" data-linked-resource-container-id=
-=3D"3380084738" data-linked-resource-container-version=3D"7" data-media-id=
+=3D"3380084738" data-linked-resource-container-version=3D"8" data-media-id=
 =3D"26136e2a-a389-4974-8b66-82195693b19d" data-media-type=3D"file" height=
 =3D"173"></span>
 <p></p><span class=3D"confluence-embedded-file-wrapper image-center-wrapper=
@@ -544,7 +544,7 @@ d=3D"3381035136" data-linked-resource-version=3D"1" data-linked-resource-ty=
 pe=3D"attachment" data-linked-resource-default-alias=3D"image-20250106-1112=
 08.png" data-base-url=3D"https://plantandfood.atlassian.net/wiki" data-link=
 ed-resource-content-type=3D"image/png" data-linked-resource-container-id=3D=
-"3380084738" data-linked-resource-container-version=3D"7" data-media-id=3D"=
+"3380084738" data-linked-resource-container-version=3D"8" data-media-id=3D"=
 33fb442c-73e1-423f-9968-6610b015c043" data-media-type=3D"file" height=3D"18=
 2"></span>
 <h1 id=3D"AWStraining:BoTorchTorchX-Neuralarchitecturesearch-Pythoncode">Py=
@@ -561,14 +561,14 @@ htning torchvision boto3 botocore torch </pre>
 </div>
 <h2 id=3D"AWStraining:BoTorchTorchX-Neuralarchitecturesearch-mnist.py">mnis=
 t.py</h2>
-<div id=3D"expander-1505346301" class=3D"expand-container">
-<div id=3D"expander-control-1505346301" class=3D"expand-control">
+<div id=3D"expander-793206358" class=3D"expand-container">
+<div id=3D"expander-control-793206358" class=3D"expand-control">
 <span class=3D"expand-control-icon"><img style=3D"vertical-align:middle;" c=
 lass=3D"expand-control-image" src=3D"758fb6d0c26d2745ebc5a81a3952a391d48860=
 b4db58298bed1db04870b7e9df" width=3D"16" height=3D"16"></span><span class=
 =3D"expand-control-text">mnist.py</span>
 </div>
-<div id=3D"expander-content-1505346301" class=3D"expand-content">
+<div id=3D"expander-content-793206358" class=3D"expand-content">
 <div class=3D"code panel pdl" style=3D"border-width: 1px;">
 <div class=3D"codeContent panelContent pdl">
 <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=3D"brush=
@@ -598,6 +598,7 @@ from torchvision.datasets import MNIST
 warnings.filterwarnings("ignore")  # Disable data logger warnings
 logging.getLogger("pytorch_lightning").setLevel(logging.ERROR)  # Disable G=
 PU/TPU prints
+
 
 def parse_args():
     parser =3D argparse.ArgumentParser(description=3D"train mnist")
@@ -725,7 +726,8 @@ self.transform)
 
 
 def run_training_job():
-
+    import time
+   =20
     mnist_model =3D MnistModel()
 
     # Initialize a trainer (don't log anything since things get so slow...)
@@ -758,12 +760,14 @@ def run_training_job():
     logger.log_metrics({"num_params": num_params})
 
     logger.save()
-
+   =20
+    time.sleep(25)
+   =20
     # Print outputs
     print(f"train time: {train_time}, val acc: {val_accuracy}, num_params: =
 {num_params}")
 
-
+   =20
 if __name__ =3D=3D "__main__":
     run_training_job()</pre>
 </div>
@@ -774,14 +778,14 @@ if __name__ =3D=3D "__main__":
 k">Jupyter notebook</h2>
 <h3 id=3D"AWStraining:BoTorchTorchX-Neuralarchitecturesearch-AWScredentials=
 ">AWS credentials</h3>
-<div id=3D"expander-128348984" class=3D"expand-container">
-<div id=3D"expander-control-128348984" class=3D"expand-control">
+<div id=3D"expander-640109175" class=3D"expand-container">
+<div id=3D"expander-control-640109175" class=3D"expand-control">
 <span class=3D"expand-control-icon"><img style=3D"vertical-align:middle;" c=
 lass=3D"expand-control-image" src=3D"758fb6d0c26d2745ebc5a81a3952a391d48860=
 b4db58298bed1db04870b7e9df" width=3D"16" height=3D"16"></span><span class=
 =3D"expand-control-text">AWS credentials</span>
 </div>
-<div id=3D"expander-content-128348984" class=3D"expand-content">
+<div id=3D"expander-content-640109175" class=3D"expand-content">
 <div class=3D"code panel pdl" style=3D"border-width: 1px;">
 <div class=3D"codeContent panelContent pdl">
 <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=3D"brush=
@@ -797,14 +801,14 @@ os.environ["AWS_DEFAULT_REGION"] =3D "ap-southeast-2"</pre>
 </div>
 <h3 id=3D"AWStraining:BoTorchTorchX-Neuralarchitecturesearch-TorchXRunner">=
 TorchXRunner</h3>
-<div id=3D"expander-1859395766" class=3D"expand-container">
-<div id=3D"expander-control-1859395766" class=3D"expand-control">
+<div id=3D"expander-677916152" class=3D"expand-container">
+<div id=3D"expander-control-677916152" class=3D"expand-control">
 <span class=3D"expand-control-icon"><img style=3D"vertical-align:middle;" c=
 lass=3D"expand-control-image" src=3D"758fb6d0c26d2745ebc5a81a3952a391d48860=
 b4db58298bed1db04870b7e9df" width=3D"16" height=3D"16"></span><span class=
 =3D"expand-control-text">TorchXRunner</span>
 </div>
-<div id=3D"expander-content-1859395766" class=3D"expand-content">
+<div id=3D"expander-content-677916152" class=3D"expand-content">
 <div class=3D"code panel pdl" style=3D"border-width: 1px;">
 <div class=3D"codeContent panelContent pdl">
 <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=3D"brush=
@@ -816,13 +820,15 @@ import torchx
 from torchx import specs
 from torchx.components import utils
 
+src_log_dir =3D f"{os.getcwd()}/output"
+dst_log_dir =3D "/output"
 
 def trainer(
     log_path: str,
     hidden_size_1: int,
     hidden_size_2: int,
     learning_rate: float,
-    epochs: int,
+    # epochs: int,
     dropout: float,
     batch_size: int,
     trial_idx: int =3D -1,
@@ -833,8 +839,9 @@ def trainer(
         log_path =3D Path(log_path).joinpath(str(trial_idx)).absolute().as_=
 posix()
 
-    return utils.python(
-        # command line arguments to the training script
+    return utils.sh(
+        "python",
+        "mnist.py",
         "--log_path",
         log_path,
         "--hidden_size_1",
@@ -843,34 +850,38 @@ posix()
         str(hidden_size_2),
         "--learning_rate",
         str(learning_rate),
-        "--epochs",
-        str(epochs),
+        # "--epochs",
+        # str(epochs),
         "--dropout",
         str(dropout),
         "--batch_size",
         str(batch_size),
         # other config options
-        name=3D"trainer",
-        script=3D"/opt/mnist.py",
+        # name=3D"trainer",
+        # script=3D"mnist.py",
         image=3D"ghcr.io/jbris/torchx-aws-test:1.0.0",
+        mounts=3D[
+            "type=3Dbind",
+            f"src=3D{src_log_dir}",
+            f"dst=3D{dst_log_dir}",
+            "perm=3Drwm"
+        ]
     )
 
 import tempfile
 from ax.runners.torchx import TorchXRunner
 
 # Make a temporary dir to log our results into
-log_dir =3D tempfile.mkdtemp()
 
 scheduler =3D "aws_batch"
-# scheduler=3D"local_cwd"
+scheduler=3D"local_cwd"
+scheduler=3D"local_docker"
 
 ax_runner =3D TorchXRunner(
     tracker_base=3D"/tmp/",
     component=3Dtrainer,
-    # NOTE: To launch this job on a cluster instead of locally you can
-    # specify a different scheduler and adjust arguments appropriately.
     scheduler=3Dscheduler,
-    component_const_params=3D{"log_path": log_dir},
+    component_const_params=3D{"log_path": dst_log_dir},
     cfg=3D{"queue": "torchx_queue"},
 )</pre>
 </div>
@@ -879,14 +890,14 @@ ax_runner =3D TorchXRunner(
 </div>
 <h3 id=3D"AWStraining:BoTorchTorchX-Neuralarchitecturesearch-Parameterrange=
 s">Parameter ranges</h3>
-<div id=3D"expander-2047898303" class=3D"expand-container">
-<div id=3D"expander-control-2047898303" class=3D"expand-control">
+<div id=3D"expander-382534726" class=3D"expand-container">
+<div id=3D"expander-control-382534726" class=3D"expand-control">
 <span class=3D"expand-control-icon"><img style=3D"vertical-align:middle;" c=
 lass=3D"expand-control-image" src=3D"758fb6d0c26d2745ebc5a81a3952a391d48860=
 b4db58298bed1db04870b7e9df" width=3D"16" height=3D"16"></span><span class=
 =3D"expand-control-text">Parameter ranges</span>
 </div>
-<div id=3D"expander-content-2047898303" class=3D"expand-content">
+<div id=3D"expander-content-382534726" class=3D"expand-content">
 <div class=3D"code panel pdl" style=3D"border-width: 1px;">
 <div class=3D"codeContent panelContent pdl">
 <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=3D"brush=
@@ -905,31 +916,31 @@ parameters =3D [
     # in turn makes the Pareto frontier look pretty weird.
     RangeParameter(
         name=3D"hidden_size_1",
-        lower=3D16,
-        upper=3D128,
+        lower=3D4,
+        upper=3D8,
         parameter_type=3DParameterType.INT,
         log_scale=3DTrue,
     ),
     RangeParameter(
         name=3D"hidden_size_2",
-        lower=3D16,
-        upper=3D128,
+        lower=3D4,
+        upper=3D8,
         parameter_type=3DParameterType.INT,
         log_scale=3DTrue,
     ),
     RangeParameter(
         name=3D"learning_rate",
-        lower=3D1e-4,
-        upper=3D1e-2,
+        lower=3D1e-2,
+        upper=3D1e-1,
         parameter_type=3DParameterType.FLOAT,
         log_scale=3DTrue,
     ),
-    RangeParameter(
-        name=3D"epochs",
-        lower=3D1,
-        upper=3D4,
-        parameter_type=3DParameterType.INT,
-    ),
+    # RangeParameter(
+    #     name=3D"epochs",
+    #     lower=3D1,
+    #     upper=3D2,
+    #     parameter_type=3DParameterType.INT,
+    # ),
     RangeParameter(
         name=3D"dropout",
         lower=3D0.0,
@@ -938,7 +949,7 @@ parameters =3D [
     ),
     ChoiceParameter(  # NOTE: ``ChoiceParameters`` don't require log-scale
         name=3D"batch_size",
-        values=3D[32, 64, 128, 256],
+        values=3D[16, 32],
         parameter_type=3DParameterType.INT,
         is_ordered=3DTrue,
         sort_values=3DTrue,
@@ -964,8 +975,8 @@ class MyTensorboardMetric(TensorboardMetric):
     # the prespecified log dir.
     def _get_event_multiplexer_for_trial(self, trial):
         mul =3D event_multiplexer.EventMultiplexer(max_reload_threads=3D20)
-        mul.AddRunsFromDirectory(Path(log_dir).joinpath(str(trial.index)).a=
-s_posix(), None)
+        mul.AddRunsFromDirectory(Path(src_log_dir).joinpath(str(trial.index=
+)).as_posix(), None)
         mul.Reload()
    =20
         return mul
@@ -975,7 +986,7 @@ s_posix(), None)
     # utilizes this to implement trial-level early-stopping functionality.
     @classmethod
     def is_available_while_running(cls):
-        return False
+        return True
 
 val_acc =3D MyTensorboardMetric(
     name=3D"val_acc",
@@ -986,21 +997,22 @@ model_num_params =3D MyTensorboardMetric(
     name=3D"num_params",
     tag=3D"num_params",
     lower_is_better=3DTrue,
-)</pre>
+)
+</pre>
 </div>
 </div>
 </div>
 </div>
 <h3 id=3D"AWStraining:BoTorchTorchX-Neuralarchitecturesearch-Runtrials">Run=
  trials</h3>
-<div id=3D"expander-493439439" class=3D"expand-container">
-<div id=3D"expander-control-493439439" class=3D"expand-control">
+<div id=3D"expander-470852014" class=3D"expand-container">
+<div id=3D"expander-control-470852014" class=3D"expand-control">
 <span class=3D"expand-control-icon"><img style=3D"vertical-align:middle;" c=
 lass=3D"expand-control-image" src=3D"758fb6d0c26d2745ebc5a81a3952a391d48860=
 b4db58298bed1db04870b7e9df" width=3D"16" height=3D"16"></span><span class=
 =3D"expand-control-text">Run trials</span>
 </div>
-<div id=3D"expander-content-493439439" class=3D"expand-content">
+<div id=3D"expander-content-470852014" class=3D"expand-content">
 <div class=3D"code panel pdl" style=3D"border-width: 1px;">
 <div class=3D"codeContent panelContent pdl">
 <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=3D"brush=
@@ -1049,25 +1061,27 @@ scheduler =3D Scheduler(
     experiment=3Dexperiment,
     generation_strategy=3Dgs,
     options=3DSchedulerOptions(
-        total_trials=3Dtotal_trials, max_pending_trials=3D4
+        total_trials=3Dtotal_trials, max_pending_trials=3D4,
+        init_seconds_between_polls=3D5, seconds_between_polls_backoff_facto=
+r=3D1
     ),
 )
 
-scheduler.run_n_trials(3)</pre>
+scheduler.run_n_trials(1)</pre>
 </div>
 </div>
 </div>
 </div>
 <h3 id=3D"AWStraining:BoTorchTorchX-Neuralarchitecturesearch-Results">Resul=
 ts</h3>
-<div id=3D"expander-302156609" class=3D"expand-container">
-<div id=3D"expander-control-302156609" class=3D"expand-control">
+<div id=3D"expander-1581576730" class=3D"expand-container">
+<div id=3D"expander-control-1581576730" class=3D"expand-control">
 <span class=3D"expand-control-icon"><img style=3D"vertical-align:middle;" c=
 lass=3D"expand-control-image" src=3D"758fb6d0c26d2745ebc5a81a3952a391d48860=
 b4db58298bed1db04870b7e9df" width=3D"16" height=3D"16"></span><span class=
 =3D"expand-control-text">Results</span>
 </div>
-<div id=3D"expander-content-302156609" class=3D"expand-content">
+<div id=3D"expander-content-1581576730" class=3D"expand-content">
 <div class=3D"code panel pdl" style=3D"border-width: 1px;">
 <div class=3D"codeContent panelContent pdl">
 <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=3D"brush=
@@ -1088,7 +1102,7 @@ _pareto_frontier_scatter_2d_plotly(experiment)</pre>
     </div>
 </body>
 </html>
-------=_Part_74_170229025.1736168332758
+------=_Part_2_89532518.1736199601851
 Content-Type: application/octet-stream
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/62c3b2e1c87d31fbeab1adafb3311e44664efaa25ebce5303a9405f45777489b
@@ -2313,7 +2327,7 @@ cj1l44jL9dMjIyM/s7EyMnLoSB/P2NfDIyM/d9pcrqftvoNxB+25Drtcjx8eHv7xyvDwY68Ob/vh
 vIGUFYgXLMVsWT7b5n8QjhjIcOYZ8K0tY8If78s8q30ikLL8YZuzL57v+hyddPjabfNmKGVN2OsY
 3DvtTj3c3yNf3z/wb/CyP2kxWstKRjLOGEenwX7YfO3d2CNbv1DfL9jgbWees/sEogM5SYfT35sj
 kOz7Js4a49a/AIbkpyWkVzY0AAAAAElFTkSuQmCC
-------=_Part_74_170229025.1736168332758
+------=_Part_2_89532518.1736199601851
 Content-Type: application/octet-stream
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/e1543dd86eec6a87d6329f7e63c6cfa079f74dbb340358c9cc0de7a621e5c3f8
@@ -3433,7 +3447,7 @@ Oy5x2zcw9htJT4qmrNcKp9tUaMvRVneyZd3EOBAUr58w9mI9u8a+OcPk6hHuQwtV2nLK9F3sOqz0
 95sIBP7uzo4yv+fifH8FTbGeFUcwmObGbcB1TcV40JWgdvCEess1Z8cXJDQcIB88E4ImKoecTFqv
 qDG5MDluU1t+LojkVYQIESJEiBDxMfHZpbK+O3jj3d9/zAj2ycd4TwuFRRqS0vJYO/ZGrHvv1h+h
 AR9Wyw8xpiJ5FSFChAgRIkR8THxf8vr/AVKEsKqQoMmOAAAAAElFTkSuQmCC
-------=_Part_74_170229025.1736168332758
+------=_Part_2_89532518.1736199601851
 Content-Type: application/octet-stream
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/ca75f119f25174a1ecf99205e1342546b06dc0307cd9b239016b9a6a06e24464
@@ -4141,7 +4155,7 @@ DkxOoagpBgaHmJgM8td+HFvHvfS+3zwPWFgME1tew+nqSb/m80+87SF7KxI4hRBCCFEsebRlQScX
 y/8rI2cHjkSi6e25+Xmi0RiKovDE70/vm5oOsrG5ye7uLoHJzDrVcHjp3UzoFSRwCiGEEKJYEjhP
 cPTYTglYEjiFEEIIUSwJnP+x3GX4/OfSH5zlzL2WW4qgZkvw3/ez6yVwCiGEEKJYEjhFQRI4hRBC
 CFEsCZyiIAmcQgghhCiWBE5RkAROIYQQQhTrbztZazmGWoIEAAAAAElFTkSuQmCC
-------=_Part_74_170229025.1736168332758
+------=_Part_2_89532518.1736199601851
 Content-Type: application/octet-stream
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/c61f1561be7bd793c15979cbe677f9ac66e887ad1a3ca3abed89a3e6aab3b279
@@ -4782,7 +4796,7 @@ Jj45h4kVnbLMtDFFRk41OseZ7C5jIqHkbiTMCSGEEK7lQHXmlEnodxQNdk5mr5QjcU5krzy3va7t
 ocW5nWXHZPbKc/bSJRbL9j6Ucie3KTC8k31/9sEZFosZk2N/ynk69uncv9lkP/bW+mb7+spxHedy
 WEiYE0IIIVzLl3s6L2c9OIt1xwwTMpPDpyFhTgghhHAt/z+3u2x0xnwgjwAAAABJRU5ErkJggg==
 
-------=_Part_74_170229025.1736168332758
+------=_Part_2_89532518.1736199601851
 Content-Type: application/octet-stream
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/9602f7b7819f67be6a7bfcec3d576a6ed0cc80b877879e4331eb8ef272dcb9e1
@@ -5435,7 +5449,7 @@ u5b1offj9yNcWwtbSorSUV3Ns4gUwxJ1551GtxMnLCW8zUyjSCKRSCQSiUR6CZJlEeGwCEkS5WBQ
 lAMBURZFvmX7+LEBGpssSf6WadNksbCQZQP5+Xj0Y2zcgOh2u0RLaQlvM9OYRiKRSCQSiUTqZ7W3
 p8HhSENDw7Pp3r1nUzd9dNTVZQBIEiZN+tKWmVkAIBEuV0bsGB2O9jSz2czb/wKPzQNP04doLgAA
 AABJRU5ErkJggg==
-------=_Part_74_170229025.1736168332758
+------=_Part_2_89532518.1736199601851
 Content-Type: application/octet-stream
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/f63128b8b893f64b99b766ff07f83b97d7a2f56d5429b2b6d1b30809571ccb08
@@ -6809,7 +6823,7 @@ XOKQgqRERg3y7+o4Isg3XnMD6PRyoO39jTk06iiKm0akbad5jYyEGLSNw95Cz5XfXZmhub2H1oYC
 dF2PfcdnejvpGxmiqCCTkadea/fxr8uvIfnDvIhKlciO5282P0hclJrc6i5czn1qa+pZebJGYXo8
 salanlhgZ7qF6IwKZZD8LaTKXeUyEnr1B4LS6l9wjkAgEAhOK28qGP8fAYs3Bkm0pPAAAAAASUVO
 RK5CYII=
-------=_Part_74_170229025.1736168332758
+------=_Part_2_89532518.1736199601851
 Content-Type: application/octet-stream
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/812aa05497fa1e110a6413f59b2adc874778fc88ab602ddc502952004764219d
@@ -7444,7 +7458,7 @@ MUIZCQpeYLL6dEq53MzaxNrGbfNtfaGSSm8rZLILSrl8p0Immx4ql3d9yWaOSqWld72jW1WczEDj
 U8hkPZVS6f9C5fLfQ+Xy3qy7Vi2T9WNeMjbWLEwuH6SSy4coZLJhKplsuFIqHamUSkcr5fIxzCum
 kMnGM89fqFQ6ViWTDeOWo+LL6alydOzMPG4qR8fWgvetCmsbi7uW3SC56cfNfcwTN/4Pa9QDWfKS
 wWQAAAAASUVORK5CYII=
-------=_Part_74_170229025.1736168332758
+------=_Part_2_89532518.1736199601851
 Content-Type: application/octet-stream
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/a0b9d01573dcd2cd06e9a8ded707a66e57f116d57daf3e68ba4d31ff78244acd
@@ -8711,7 +8725,7 @@ sLt3CL8O4ObiADv7pwjCGZJ6G55HPpiqI5b1B4lipJlo40sCF2N1grlYxRx5Np6eGYI4RWAbUJgO
 PkwnbdmunFblruuvbQv8VOQEQRAEQWybpUMZht3ZpperpNaGq3IDOwN6H1xn2w2dFLGDq8szHB2f
 41EP22qD3ePuYVI+L5pcxeLzMQt8rezDBAZIH3JqmlNIublvgiAIgiD+Ds06vrxlp8sRepbTX2TY
 ztgbfciprpskpwRBEATxz1it40bnOv4dOX0DdBLLw2RGafUAAAAASUVORK5CYII=
-------=_Part_74_170229025.1736168332758
+------=_Part_2_89532518.1736199601851
 Content-Type: image/png
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/758fb6d0c26d2745ebc5a81a3952a391d48860b4db58298bed1db04870b7e9df
@@ -8721,7 +8735,7 @@ iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAA3NCSVQICAjb4U/gAAAAFVBMVEX/
 CxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAAAUdEVYdENy
 ZWF0aW9uIFRpbWUANi8xLzEzOKlF0AAAACFJREFUCJljYCATsCgwqIAZTMnMyRAhsTABCIMxkVxT
 GQCLcwHyUKXpLgAAAABJRU5ErkJggg==
-------=_Part_74_170229025.1736168332758
+------=_Part_2_89532518.1736199601851
 Content-Type: application/octet-stream
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/3c20297928dac3ea2a4c0f1c212e383eb14f7dc23c50772b8dbc51f143eb429b
@@ -9732,7 +9746,7 @@ IU13IIQwvfzLbUuf3bDkmubH6/lmG2RkfiPITqTMmPl1xMYlcW6d/I56pF6nGKHTCw3rOnhBM1TS
 1kj11uj1TKW89JIlerFxvf6pjMz7ys+LjQ/r7urtV2/XSLail/wRtXs1P7Bjg11rR9q11qAzrB5h
 13293bwYfG2Q6tHnpZb6C71d6jSMDX2A5DQOjZDvETd7j+wnfnhAgL7v0dVFFhuX+a0gO5EyY+Y3
 dezhr6AHKiPzoSAfeygj89tgLE7kvwFXiAt/1qcm5wAAAABJRU5ErkJggg==
-------=_Part_74_170229025.1736168332758
+------=_Part_2_89532518.1736199601851
 Content-Type: application/octet-stream
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/900c5bd3b62eeb22347be9587e88d8c5e2d9809ecfdd4daf30d96932ff720c72
@@ -10810,7 +10824,7 @@ YmXxQmTEmoeafk/0wJuXB0/mJngyMuBZv56PoCiuWgV3Sgrci5fANX8+XLNnwzljBpxTpsA5cSIc
 3Y7zQh36CIIgCILMMkG0C2o+dLAW+5oPIDUfRGqqPsOtfpcgCIIgCDLLBEEQBEEQBFEfZJYJgiAI
 giAIoh7ILBMEQRAEQRBEPZBZJgiCIAiCIIh6ILNMEARBEARBEPVAZpkgCIIgCIIg6uH/ALnKFpxM
 G9mCAAAAAElFTkSuQmCC
-------=_Part_74_170229025.1736168332758
+------=_Part_2_89532518.1736199601851
 Content-Type: application/octet-stream
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/d2d72d2322e3677e977c47323e6c45e1a6bf24b1663ec489a64a79983ee20f32
@@ -12134,7 +12148,7 @@ iLAoeMRv6X9w+amJu/Rqv7l786t6Zn7ChdYFQfhZibAoeIQIi6/P1aUnBv6/3MHC5j/s2F32fqb7
 IAhHkwiLgkeIsCgIgiAIR5MIi4JHiLAoCIIgCEeTCIuCR4iwKAiCIAhHkwiLgkeIsCgIgiAIR5MI
 i4JHiLAoCIIgCEeTCIuCR4iwKAiCIAhHkwiLgkeIsCgIgiAIR9P3CYv/A5cYyooADSrcAAAAAElF
 TkSuQmCC
-------=_Part_74_170229025.1736168332758
+------=_Part_2_89532518.1736199601851
 Content-Type: application/octet-stream
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/10c1fa2bdefe9c70fa2ff2cb2d4dfb5d0439bf28c31eb308dbec2704e6d31b31
@@ -13116,7 +13130,7 @@ puculVdJTl/uzeLpr5GOVcU7OTlFQ2MzKyo1gcGh8rasnDyqq2tZWlHjH6RsS03Por6+kenZeRqb
 mtf8eDuNEKECgUAgEAi2GzFt5+3YBevnysoKM7OzstDr7umRt42MjjI1NS27cOru6ZW3DY+MMD0z
 g1qtluOzi9ZZIUIFAoFAIBBsN0KECu6IEKECgUAgEAi2GyFCBXdEiFCBQCAQCATbzXoR+v8DQMaf
 o9bnF3UAAAAASUVORK5CYII=
-------=_Part_74_170229025.1736168332758
+------=_Part_2_89532518.1736199601851
 Content-Type: application/octet-stream
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/e4fa61f6c462408380b4eefce821d9aabe31d2bb3f21b60ba4204ecc9f9083c0
@@ -14274,7 +14288,7 @@ XoSjcYR8bvjDcSDgRk9HK/pGtQiE/HB5OCHq0E2ht38MDi/3v0kzAa3FjVjEi+62VvSNaeh29cgg
 Bsen4Q2EEmEsOjy76mkUyXuht3DT2paZCfQOjMETiMChV6O5tQt2bxRG9TCUnYPwkpXooiG4XH7E
 YhE43S4uCMTvovWaNLlpvZxOF2iTRP0YHujD+LQBgfAZ0uQwMDAwMHyicKEC8P8DhxS8imUgHyMA
 AAAASUVORK5CYII=
-------=_Part_74_170229025.1736168332758
+------=_Part_2_89532518.1736199601851
 Content-Type: application/octet-stream
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/b4a8c7ce6e140622d0c926d3d4471d24416b3dee524675f0d6c2d05951e8dec0
@@ -15616,7 +15630,7 @@ b+e/Vhn4WaKOf/1YUlJSUlJSUlLHzz7W8W9JOgZsNpN3uU3oBiU49mjBWHdIYSvxzKCkJcgMBAkJ
 CQkJCYk/B39K1CKFrcSzhvIBfVzyt4SEhISEhIQE3bTCnxMMk8JWQkJCQkJCQkLiSwEpbCUkJCQk
 JCQkJL4UkMJWQkJCQkJCQkLiSwEpbCUkJCQkJCQkJL4U+B9MRvM13Vz/1gAAAABJRU5ErkJggg==
 
-------=_Part_74_170229025.1736168332758
+------=_Part_2_89532518.1736199601851
 Content-Type: application/octet-stream
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/7da92dbd9a8a3c349e59852b3c68ec62573da794affd200f489109283acdbecc
@@ -16347,7 +16361,7 @@ fecKK6T7yX1uMjv+TH9XUj/x8zAu9wGn5/FvjzfbV24/v/V5qezn5fbjO45Tbj/fPQ5phtl56Vnb
 04dtZ4/jkxOaVZl5w13dOqxWG8FQmGctrVLb7MIi8Xj8ul/htYjwKgiCIAjCTRLlYd+HVGjh4we1
 YEi6/Aqv18vFxQWJRAKPx5NpOzri7Pycy8tL3Nm2UCj0Nhj/UER4FQRBEAThJonwKnwQEV4FQRAE
 QbhJ/wKxmDefkDPHfwAAAABJRU5ErkJggg==
-------=_Part_74_170229025.1736168332758
+------=_Part_2_89532518.1736199601851
 Content-Type: application/octet-stream
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/797cccdfdc160c693a8729294839ca3ee9da42a59364a12f069cc5f19afbd661
@@ -17512,7 +17526,7 @@ crMeDmfCy+WedT///P+58fzzz+1zTz9FusvBb//2z7AkkQULFixYsGDB4giwn5ueejC+C3/Nffz4
 d93Hj7/o4XBO+Roa7pBEz0cvY294ORw/EwJMCHo5nJCPwwl7GxoiPi434uVwYkyIe+n/W14OZ8HD
 4Zi8DQ1DPg5H4mtoOO1qaPgrN5f7R47nn/8SSWrvUed9dRtZPNv4/wBNsJFmMyVr2QAAAABJRU5E
 rkJggg==
-------=_Part_74_170229025.1736168332758
+------=_Part_2_89532518.1736199601851
 Content-Type: application/octet-stream
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/0c5d936b3300c1b492232e96c0fedeebf2ad57f8f79264cadfa160ee2ed77561
@@ -18250,7 +18264,7 @@ u6g3GY1eFDb/Xl3Lj1yMpfaVHOOyZqf6/dWxFMLh+Pe5Nka8WObld70S1GxjE+qrvuUVC0sruHe8
 VFbVqO9pKmvw7u4yt7CMvsWgjpFs/7WDnoRLIYQQQqRCln+8ydXQ/Eufyy9EwqUQQgghUiHhUtxI
 wqUQQgghUiHhUtxIwqUQQgghUiHhUtxIwqUQQgghUiHhUtxIwqUQQgghUiHhUtxIwqUQQgghUvH/
 gfL5CyWN6rQAAAAASUVORK5CYII=
-------=_Part_74_170229025.1736168332758
+------=_Part_2_89532518.1736199601851
 Content-Type: application/octet-stream
 Content-Transfer-Encoding: base64
 Content-Location: file:///C:/57b1712103df14e80f3fac5466adaa9dfab14fe5fc992077e42c023671259775
@@ -19331,4 +19345,4 @@ SqV6JXtl07QcZ1WwYzjOwdpQyWRgbTOhpxCOv6zkuEwVxy38z3HRSqm0i7pt2w5KqfSua4ypVvk1
 jX/4hSQIgiAIgvizwURTZjWCLQIck0jqFDRp0iyvdev2bDq5QCp9Q8FxH8tlsq8VHPcdC8T4j/Bj
 U8nDFFFRoxUcF6OWSicxD6JSKp2lksnmKqXSmUqpdDyrI4q7XqqoqO6FUVGvKKXSBxQc1yKvXbv6
 1eh7+UCRGg3u+H+bo9rZU/G1LwAAAABJRU5ErkJggg==
-------=_Part_74_170229025.1736168332758--
+------=_Part_2_89532518.1736199601851--

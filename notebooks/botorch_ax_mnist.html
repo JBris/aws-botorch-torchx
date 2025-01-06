@@ -7515,7 +7515,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [78]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [73]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -7533,7 +7533,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [79]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [74]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -7543,13 +7543,15 @@ a.anchor-link {
 <span class="kn">from</span> <span class="nn">torchx</span> <span class="kn">import</span> <span class="n">specs</span>
 <span class="kn">from</span> <span class="nn">torchx.components</span> <span class="kn">import</span> <span class="n">utils</span>
 
+<span class="n">src_log_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span><span class="si">}</span><span class="s2">/output"</span>
+<span class="n">dst_log_dir</span> <span class="o">=</span> <span class="s2">"/output"</span>
 
 <span class="k">def</span> <span class="nf">trainer</span><span class="p">(</span>
     <span class="n">log_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">hidden_size_1</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">hidden_size_2</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">learning_rate</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-    <span class="n">epochs</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="c1"># epochs: int,</span>
     <span class="n">dropout</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">trial_idx</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
@@ -7559,8 +7561,9 @@ a.anchor-link {
     <span class="k">if</span> <span class="n">trial_idx</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">log_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">log_path</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">trial_idx</span><span class="p">))</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span>
 
-    <span class="k">return</span> <span class="n">utils</span><span class="o">.</span><span class="n">python</span><span class="p">(</span>
-        <span class="c1"># command line arguments to the training script</span>
+    <span class="k">return</span> <span class="n">utils</span><span class="o">.</span><span class="n">sh</span><span class="p">(</span>
+        <span class="s2">"python"</span><span class="p">,</span>
+        <span class="s2">"mnist.py"</span><span class="p">,</span>
         <span class="s2">"--log_path"</span><span class="p">,</span>
         <span class="n">log_path</span><span class="p">,</span>
         <span class="s2">"--hidden_size_1"</span><span class="p">,</span>
@@ -7569,33 +7572,38 @@ a.anchor-link {
         <span class="nb">str</span><span class="p">(</span><span class="n">hidden_size_2</span><span class="p">),</span>
         <span class="s2">"--learning_rate"</span><span class="p">,</span>
         <span class="nb">str</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">),</span>
-        <span class="s2">"--epochs"</span><span class="p">,</span>
-        <span class="nb">str</span><span class="p">(</span><span class="n">epochs</span><span class="p">),</span>
+        <span class="c1"># "--epochs",</span>
+        <span class="c1"># str(epochs),</span>
         <span class="s2">"--dropout"</span><span class="p">,</span>
         <span class="nb">str</span><span class="p">(</span><span class="n">dropout</span><span class="p">),</span>
         <span class="s2">"--batch_size"</span><span class="p">,</span>
         <span class="nb">str</span><span class="p">(</span><span class="n">batch_size</span><span class="p">),</span>
         <span class="c1"># other config options</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">"trainer"</span><span class="p">,</span>
-        <span class="n">script</span><span class="o">=</span><span class="s2">"mnist.py"</span><span class="p">,</span>
-        <span class="c1"># script="/opt/mnist.py",</span>
+        <span class="c1"># name="trainer",</span>
+        <span class="c1"># script="mnist.py",</span>
         <span class="n">image</span><span class="o">=</span><span class="s2">"ghcr.io/jbris/torchx-aws-test:1.0.0"</span><span class="p">,</span>
+        <span class="n">mounts</span><span class="o">=</span><span class="p">[</span>
+            <span class="s2">"type=bind"</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">"src=</span><span class="si">{</span><span class="n">src_log_dir</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">"dst=</span><span class="si">{</span><span class="n">dst_log_dir</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+            <span class="s2">"perm=rwm"</span>
+        <span class="p">]</span>
     <span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">tempfile</span>
 <span class="kn">from</span> <span class="nn">ax.runners.torchx</span> <span class="kn">import</span> <span class="n">TorchXRunner</span>
 
 <span class="c1"># Make a temporary dir to log our results into</span>
-<span class="n">log_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
 
 <span class="n">scheduler</span> <span class="o">=</span> <span class="s2">"aws_batch"</span>
 <span class="n">scheduler</span><span class="o">=</span><span class="s2">"local_cwd"</span>
+<span class="n">scheduler</span><span class="o">=</span><span class="s2">"local_docker"</span>
 
 <span class="n">ax_runner</span> <span class="o">=</span> <span class="n">TorchXRunner</span><span class="p">(</span>
     <span class="n">tracker_base</span><span class="o">=</span><span class="s2">"/tmp/"</span><span class="p">,</span>
     <span class="n">component</span><span class="o">=</span><span class="n">trainer</span><span class="p">,</span>
     <span class="n">scheduler</span><span class="o">=</span><span class="n">scheduler</span><span class="p">,</span>
-    <span class="n">component_const_params</span><span class="o">=</span><span class="p">{</span><span class="s2">"log_path"</span><span class="p">:</span> <span class="n">log_dir</span><span class="p">},</span>
+    <span class="n">component_const_params</span><span class="o">=</span><span class="p">{</span><span class="s2">"log_path"</span><span class="p">:</span> <span class="n">dst_log_dir</span><span class="p">},</span>
     <span class="n">cfg</span><span class="o">=</span><span class="p">{</span><span class="s2">"queue"</span><span class="p">:</span> <span class="s2">"torchx_queue"</span><span class="p">},</span>
 <span class="p">)</span>
 </pre></div>
@@ -7608,7 +7616,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [80]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [75]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">ax.core</span> <span class="kn">import</span> <span class="p">(</span>
@@ -7625,31 +7633,31 @@ a.anchor-link {
     <span class="c1"># in turn makes the Pareto frontier look pretty weird.</span>
     <span class="n">RangeParameter</span><span class="p">(</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">"hidden_size_1"</span><span class="p">,</span>
-        <span class="n">lower</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
-        <span class="n">upper</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+        <span class="n">lower</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+        <span class="n">upper</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
         <span class="n">parameter_type</span><span class="o">=</span><span class="n">ParameterType</span><span class="o">.</span><span class="n">INT</span><span class="p">,</span>
         <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">),</span>
     <span class="n">RangeParameter</span><span class="p">(</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">"hidden_size_2"</span><span class="p">,</span>
-        <span class="n">lower</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
-        <span class="n">upper</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+        <span class="n">lower</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+        <span class="n">upper</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
         <span class="n">parameter_type</span><span class="o">=</span><span class="n">ParameterType</span><span class="o">.</span><span class="n">INT</span><span class="p">,</span>
         <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">),</span>
     <span class="n">RangeParameter</span><span class="p">(</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">"learning_rate"</span><span class="p">,</span>
-        <span class="n">lower</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span>
-        <span class="n">upper</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span>
+        <span class="n">lower</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span>
+        <span class="n">upper</span><span class="o">=</span><span class="mf">1e-1</span><span class="p">,</span>
         <span class="n">parameter_type</span><span class="o">=</span><span class="n">ParameterType</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">,</span>
         <span class="n">log_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">),</span>
-    <span class="n">RangeParameter</span><span class="p">(</span>
-        <span class="n">name</span><span class="o">=</span><span class="s2">"epochs"</span><span class="p">,</span>
-        <span class="n">lower</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-        <span class="n">upper</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-        <span class="n">parameter_type</span><span class="o">=</span><span class="n">ParameterType</span><span class="o">.</span><span class="n">INT</span><span class="p">,</span>
-    <span class="p">),</span>
+    <span class="c1"># RangeParameter(</span>
+    <span class="c1">#     name="epochs",</span>
+    <span class="c1">#     lower=1,</span>
+    <span class="c1">#     upper=2,</span>
+    <span class="c1">#     parameter_type=ParameterType.INT,</span>
+    <span class="c1"># ),</span>
     <span class="n">RangeParameter</span><span class="p">(</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">"dropout"</span><span class="p">,</span>
         <span class="n">lower</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
@@ -7658,7 +7666,7 @@ a.anchor-link {
     <span class="p">),</span>
     <span class="n">ChoiceParameter</span><span class="p">(</span>  <span class="c1"># NOTE: ``ChoiceParameters`` don't require log-scale</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">"batch_size"</span><span class="p">,</span>
-        <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">],</span>
+        <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span>
         <span class="n">parameter_type</span><span class="o">=</span><span class="n">ParameterType</span><span class="o">.</span><span class="n">INT</span><span class="p">,</span>
         <span class="n">is_ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">sort_values</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -7683,7 +7691,7 @@ a.anchor-link {
     <span class="c1"># the prespecified log dir.</span>
     <span class="k">def</span> <span class="nf">_get_event_multiplexer_for_trial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trial</span><span class="p">):</span>
         <span class="n">mul</span> <span class="o">=</span> <span class="n">event_multiplexer</span><span class="o">.</span><span class="n">EventMultiplexer</span><span class="p">(</span><span class="n">max_reload_threads</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-        <span class="n">mul</span><span class="o">.</span><span class="n">AddRunsFromDirectory</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">log_dir</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">trial</span><span class="o">.</span><span class="n">index</span><span class="p">))</span><span class="o">.</span><span class="n">as_posix</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">mul</span><span class="o">.</span><span class="n">AddRunsFromDirectory</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">src_log_dir</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">trial</span><span class="o">.</span><span class="n">index</span><span class="p">))</span><span class="o">.</span><span class="n">as_posix</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
         <span class="n">mul</span><span class="o">.</span><span class="n">Reload</span><span class="p">()</span>
     
         <span class="k">return</span> <span class="n">mul</span>
@@ -7693,7 +7701,7 @@ a.anchor-link {
     <span class="c1"># utilizes this to implement trial-level early-stopping functionality.</span>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">is_available_while_running</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-        <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span>
 
 <span class="n">val_acc</span> <span class="o">=</span> <span class="n">MyTensorboardMetric</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">"val_acc"</span><span class="p">,</span>
@@ -7715,7 +7723,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [84]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [76]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">ax.core</span> <span class="kn">import</span> <span class="n">MultiObjective</span><span class="p">,</span> <span class="n">Objective</span><span class="p">,</span> <span class="n">ObjectiveThreshold</span>
@@ -7760,11 +7768,12 @@ a.anchor-link {
     <span class="n">experiment</span><span class="o">=</span><span class="n">experiment</span><span class="p">,</span>
     <span class="n">generation_strategy</span><span class="o">=</span><span class="n">gs</span><span class="p">,</span>
     <span class="n">options</span><span class="o">=</span><span class="n">SchedulerOptions</span><span class="p">(</span>
-        <span class="n">total_trials</span><span class="o">=</span><span class="n">total_trials</span><span class="p">,</span> <span class="n">max_pending_trials</span><span class="o">=</span><span class="mi">4</span>
+        <span class="n">total_trials</span><span class="o">=</span><span class="n">total_trials</span><span class="p">,</span> <span class="n">max_pending_trials</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+        <span class="n">init_seconds_between_polls</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">seconds_between_polls_backoff_factor</span><span class="o">=</span><span class="mi">1</span>
     <span class="p">),</span>
 <span class="p">)</span>
 
-<span class="n">scheduler</span><span class="o">.</span><span class="n">run_n_trials</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">scheduler</span><span class="o">.</span><span class="n">run_n_trials</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7777,103 +7786,519 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>[INFO 01-07 02:08:28] ax.modelbridge.dispatch_utils: Using Models.BOTORCH_MODULAR since there is at least one ordered parameter and there are no unordered categorical parameters.
-[INFO 01-07 02:08:28] ax.modelbridge.dispatch_utils: Calculating the number of remaining initialization trials based on num_initialization_trials=None max_initialization_trials=None num_tunable_parameters=6 num_trials=48 use_batch_trials=False
-[INFO 01-07 02:08:28] ax.modelbridge.dispatch_utils: calculated num_initialization_trials=9
-[INFO 01-07 02:08:28] ax.modelbridge.dispatch_utils: num_completed_initialization_trials=0 num_remaining_initialization_trials=9
-[INFO 01-07 02:08:28] ax.modelbridge.dispatch_utils: `verbose`, `disable_progbar`, and `jit_compile` are not yet supported when using `choose_generation_strategy` with ModularBoTorchModel, dropping these arguments.
-[INFO 01-07 02:08:28] ax.modelbridge.dispatch_utils: Using Bayesian Optimization generation strategy: GenerationStrategy(name='Sobol+BoTorch', steps=[Sobol for 9 trials, BoTorch for subsequent trials]). Iterations after 9 will take longer to generate due to model-fitting.
-[INFO 01-07 02:08:28] Scheduler: `Scheduler` requires experiment to have immutable search space and optimization config. Setting property immutable_search_space_and_opt_config to `True` on experiment.
-[INFO 01-07 02:08:28] Scheduler: Fetching data for newly completed trials: [].
-/home/jbris/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/modelbridge/cross_validation.py:463: UserWarning:
-
-Encountered exception in computing model fit quality: RandomModelBridge does not support prediction.
-
-[INFO 01-07 02:08:28] Scheduler: Running trials [0]...
-/home/jbris/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/modelbridge/cross_validation.py:463: UserWarning:
-
-Encountered exception in computing model fit quality: RandomModelBridge does not support prediction.
-
-[INFO 01-07 02:08:29] Scheduler: Running trials [1]...
-/home/jbris/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/modelbridge/cross_validation.py:463: UserWarning:
-
-Encountered exception in computing model fit quality: RandomModelBridge does not support prediction.
-
-[INFO 01-07 02:08:30] Scheduler: Running trials [2]...
-/home/jbris/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/modelbridge/cross_validation.py:463: UserWarning:
-
-Encountered exception in computing model fit quality: RandomModelBridge does not support prediction.
-
-[INFO 01-07 02:08:31] Scheduler: Running trials [3]...
-[INFO 01-07 02:08:32] Scheduler: Fetching data for newly completed trials: [].
-[INFO 01-07 02:08:32] Scheduler: Waiting for completed trials (for 1 sec, currently running trials: 4).
-[INFO 01-07 02:08:33] Scheduler: Fetching data for newly completed trials: [].
-[INFO 01-07 02:08:33] Scheduler: Waiting for completed trials (for 1.5 sec, currently running trials: 4).
-[INFO 01-07 02:08:34] Scheduler: Fetching data for newly completed trials: [].
-[INFO 01-07 02:08:34] Scheduler: Waiting for completed trials (for 2 sec, currently running trials: 4).
-[INFO 01-07 02:08:37] Scheduler: Fetching data for newly completed trials: [].
-[INFO 01-07 02:08:37] Scheduler: Waiting for completed trials (for 3 sec, currently running trials: 4).
-[INFO 01-07 02:08:40] Scheduler: Fetching data for newly completed trials: [].
-[INFO 01-07 02:08:40] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 4).
-[INFO 01-07 02:08:45] Scheduler: Fetching data for newly completed trials: [].
-[INFO 01-07 02:08:45] Scheduler: Waiting for completed trials (for 7 sec, currently running trials: 4).
-[INFO 01-07 02:08:53] Scheduler: Fetching data for newly completed trials: [].
-[INFO 01-07 02:08:53] Scheduler: Waiting for completed trials (for 11 sec, currently running trials: 4).
-[INFO 01-07 02:09:04] Scheduler: Fetching data for newly completed trials: [].
-[INFO 01-07 02:09:04] Scheduler: Waiting for completed trials (for 17 sec, currently running trials: 4).
-[INFO 01-07 02:09:21] Scheduler: Fetching data for newly completed trials: [].
-[INFO 01-07 02:09:21] Scheduler: Waiting for completed trials (for 25 sec, currently running trials: 4).
-[INFO 01-07 02:09:47] Scheduler: Fetching data for newly completed trials: [1, 3].
-[INFO 01-07 02:09:47] Scheduler: Retrieved COMPLETED trials: [1, 3].
-/home/jbris/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/core/map_data.py:195: FutureWarning:
-
-The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
-
-/home/jbris/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/core/map_data.py:195: FutureWarning:
-
-The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
-
-/home/jbris/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/modelbridge/cross_validation.py:463: UserWarning:
-
-Encountered exception in computing model fit quality: RandomModelBridge does not support prediction.
-
-[INFO 01-07 02:09:47] Scheduler: Running trials [4]...
-[INFO 01-07 02:09:48] Scheduler: Fetching data for newly completed trials: [].
-[INFO 01-07 02:09:48] Scheduler: Waiting for completed trials (for 1 sec, currently running trials: 3).
-[INFO 01-07 02:09:49] Scheduler: Fetching data for newly completed trials: [].
-[INFO 01-07 02:09:49] Scheduler: Waiting for completed trials (for 1.5 sec, currently running trials: 3).
-[INFO 01-07 02:09:51] Scheduler: Fetching data for newly completed trials: [0].
-[INFO 01-07 02:09:51] Scheduler: Retrieved COMPLETED trials: [0].
-/home/jbris/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/core/map_data.py:195: FutureWarning:
-
-The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
-
-[INFO 01-07 02:09:51] Scheduler: Done submitting trials, waiting for remaining 2 running trials...
-[INFO 01-07 02:09:51] Scheduler: Fetching data for newly completed trials: [].
-[INFO 01-07 02:09:51] Scheduler: Waiting for completed trials (for 1 sec, currently running trials: 2).
-[INFO 01-07 02:09:52] Scheduler: Fetching data for newly completed trials: [].
-[INFO 01-07 02:09:52] Scheduler: Waiting for completed trials (for 1.5 sec, currently running trials: 2).
-[INFO 01-07 02:09:53] Scheduler: Fetching data for newly completed trials: [].
-[INFO 01-07 02:09:53] Scheduler: Waiting for completed trials (for 2 sec, currently running trials: 2).
-[INFO 01-07 02:09:55] Scheduler: Fetching data for newly completed trials: [].
-[INFO 01-07 02:09:55] Scheduler: Waiting for completed trials (for 3 sec, currently running trials: 2).
-[INFO 01-07 02:09:59] Scheduler: Fetching data for newly completed trials: [].
-[INFO 01-07 02:09:59] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 2).
-[INFO 01-07 02:10:04] Scheduler: Fetching data for newly completed trials: [].
-[INFO 01-07 02:10:04] Scheduler: Waiting for completed trials (for 7 sec, currently running trials: 2).
-[INFO 01-07 02:10:11] Scheduler: Fetching data for newly completed trials: [].
-[INFO 01-07 02:10:11] Scheduler: Waiting for completed trials (for 11 sec, currently running trials: 2).
-[INFO 01-07 02:10:23] Scheduler: Fetching data for newly completed trials: [2, 4].
-[INFO 01-07 02:10:23] Scheduler: Retrieved COMPLETED trials: [2, 4].
-/home/jbris/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/core/map_data.py:195: FutureWarning:
-
-The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
-
+<pre>[INFO 01-07 10:31:24] ax.modelbridge.dispatch_utils: Using Models.BOTORCH_MODULAR since there is at least one ordered parameter and there are no unordered categorical parameters.
+[INFO 01-07 10:31:24] ax.modelbridge.dispatch_utils: Calculating the number of remaining initialization trials based on num_initialization_trials=None max_initialization_trials=None num_tunable_parameters=5 num_trials=48 use_batch_trials=False
+[INFO 01-07 10:31:24] ax.modelbridge.dispatch_utils: calculated num_initialization_trials=9
+[INFO 01-07 10:31:24] ax.modelbridge.dispatch_utils: num_completed_initialization_trials=0 num_remaining_initialization_trials=9
+[INFO 01-07 10:31:24] ax.modelbridge.dispatch_utils: `verbose`, `disable_progbar`, and `jit_compile` are not yet supported when using `choose_generation_strategy` with ModularBoTorchModel, dropping these arguments.
+[INFO 01-07 10:31:24] ax.modelbridge.dispatch_utils: Using Bayesian Optimization generation strategy: GenerationStrategy(name='Sobol+BoTorch', steps=[Sobol for 9 trials, BoTorch for subsequent trials]). Iterations after 9 will take longer to generate due to model-fitting.
+[INFO 01-07 10:31:24] Scheduler: `Scheduler` requires experiment to have immutable search space and optimization config. Setting property immutable_search_space_and_opt_config to `True` on experiment.
+[INFO 01-07 10:31:24] Scheduler: Fetching data for newly completed trials: [].
+/home/jbris/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/modelbridge/cross_validation.py:463: UserWarning: Encountered exception in computing model fit quality: RandomModelBridge does not support prediction.
+  warn("Encountered exception in computing model fit quality: " + str(e))
+[INFO 01-07 10:31:24] Scheduler: Running trials [0]...
+[INFO 01-07 10:31:42] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:31:42] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:31:42] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148100&gt;")
+[INFO 01-07 10:31:42] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148100&gt;")
+[ERROR 01-07 10:31:42] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148100&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:31:42] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148100&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:31:42] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148100&gt;").
+[INFO 01-07 10:31:42] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:31:42] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148100&gt;").
+[INFO 01-07 10:31:42] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:31:42] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:31:48] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:31:48] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:31:48] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148730&gt;")
+[INFO 01-07 10:31:48] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148730&gt;")
+[ERROR 01-07 10:31:48] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148730&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:31:48] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148730&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:31:48] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148730&gt;").
+[INFO 01-07 10:31:48] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:31:48] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148730&gt;").
+[INFO 01-07 10:31:48] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:31:48] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:31:53] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:31:53] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:31:53] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455260e50&gt;")
+[INFO 01-07 10:31:53] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455260e50&gt;")
+[ERROR 01-07 10:31:53] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455260e50&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:31:53] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455260e50&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:31:53] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455260e50&gt;").
+[INFO 01-07 10:31:53] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:31:53] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455260e50&gt;").
+[INFO 01-07 10:31:53] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:31:53] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:31:58] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:31:58] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:31:58] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455261060&gt;")
+[INFO 01-07 10:31:58] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455261060&gt;")
+[ERROR 01-07 10:31:58] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455261060&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:31:58] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455261060&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:31:58] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455261060&gt;").
+[INFO 01-07 10:31:58] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:31:58] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455261060&gt;").
+[INFO 01-07 10:31:58] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:31:58] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:32:03] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:32:03] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:32:03] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b820&gt;")
+[INFO 01-07 10:32:03] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b820&gt;")
+[ERROR 01-07 10:32:03] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b820&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:32:03] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b820&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:32:03] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b820&gt;").
+[INFO 01-07 10:32:03] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:32:03] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b820&gt;").
+[INFO 01-07 10:32:03] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:32:03] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:32:08] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:32:08] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:32:09] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b850&gt;")
+[INFO 01-07 10:32:09] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b850&gt;")
+[ERROR 01-07 10:32:09] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b850&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:32:09] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b850&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:32:09] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b850&gt;").
+[INFO 01-07 10:32:09] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:32:09] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b850&gt;").
+[INFO 01-07 10:32:09] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:32:09] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:32:14] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:32:14] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:32:14] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148730&gt;")
+[INFO 01-07 10:32:14] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148730&gt;")
+[ERROR 01-07 10:32:14] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148730&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:32:14] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148730&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:32:14] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148730&gt;").
+[INFO 01-07 10:32:14] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:32:14] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148730&gt;").
+[INFO 01-07 10:32:14] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:32:14] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:32:19] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:32:19] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:32:19] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b850&gt;")
+[INFO 01-07 10:32:19] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b850&gt;")
+[ERROR 01-07 10:32:19] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b850&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:32:19] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b850&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:32:19] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b850&gt;").
+[INFO 01-07 10:32:19] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:32:19] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b850&gt;").
+[INFO 01-07 10:32:19] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:32:19] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:32:24] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:32:24] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:32:24] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148430&gt;")
+[INFO 01-07 10:32:24] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148430&gt;")
+[ERROR 01-07 10:32:24] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148430&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:32:24] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148430&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:32:24] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148430&gt;").
+[INFO 01-07 10:32:24] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:32:24] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148430&gt;").
+[INFO 01-07 10:32:24] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:32:24] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:32:29] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:32:29] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:32:29] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b760&gt;")
+[INFO 01-07 10:32:29] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b760&gt;")
+[ERROR 01-07 10:32:29] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b760&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:32:29] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b760&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:32:29] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b760&gt;").
+[INFO 01-07 10:32:29] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:32:29] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b760&gt;").
+[INFO 01-07 10:32:29] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:32:29] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:32:34] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:32:34] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:32:34] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148430&gt;")
+[INFO 01-07 10:32:34] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148430&gt;")
+[ERROR 01-07 10:32:34] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148430&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:32:34] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148430&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:32:34] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148430&gt;").
+[INFO 01-07 10:32:34] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:32:34] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148430&gt;").
+[INFO 01-07 10:32:34] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:32:34] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:32:39] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:32:39] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:32:39] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b4f0&gt;")
+[INFO 01-07 10:32:39] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b4f0&gt;")
+[ERROR 01-07 10:32:39] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b4f0&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:32:39] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b4f0&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:32:39] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b4f0&gt;").
+[INFO 01-07 10:32:39] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:32:39] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b4f0&gt;").
+[INFO 01-07 10:32:39] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:32:39] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:32:44] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:32:44] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:32:44] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b850&gt;")
+[INFO 01-07 10:32:44] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b850&gt;")
+[ERROR 01-07 10:32:44] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b850&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:32:44] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b850&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:32:44] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b850&gt;").
+[INFO 01-07 10:32:44] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:32:44] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b850&gt;").
+[INFO 01-07 10:32:44] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:32:44] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:32:50] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:32:50] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:32:50] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b5b0&gt;")
+[INFO 01-07 10:32:50] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b5b0&gt;")
+[ERROR 01-07 10:32:50] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b5b0&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:32:50] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b5b0&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:32:50] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b5b0&gt;").
+[INFO 01-07 10:32:50] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:32:50] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b5b0&gt;").
+[INFO 01-07 10:32:50] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:32:50] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:32:55] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:32:55] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:32:55] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b3d0&gt;")
+[INFO 01-07 10:32:55] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b3d0&gt;")
+[ERROR 01-07 10:32:55] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b3d0&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:32:55] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b3d0&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:32:55] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b3d0&gt;").
+[INFO 01-07 10:32:55] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:32:55] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b3d0&gt;").
+[INFO 01-07 10:32:55] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:32:55] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:33:00] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:33:00] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:33:00] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b520&gt;")
+[INFO 01-07 10:33:00] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b520&gt;")
+[ERROR 01-07 10:33:00] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b520&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:33:00] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b520&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:33:00] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b520&gt;").
+[INFO 01-07 10:33:00] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:33:00] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b520&gt;").
+[INFO 01-07 10:33:00] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:33:00] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:33:05] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:33:05] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:33:05] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b370&gt;")
+[INFO 01-07 10:33:05] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b370&gt;")
+[ERROR 01-07 10:33:05] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b370&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:33:05] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b370&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:33:05] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b370&gt;").
+[INFO 01-07 10:33:05] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:33:05] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b370&gt;").
+[INFO 01-07 10:33:05] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:33:05] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:33:11] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:33:11] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:33:11] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b970&gt;")
+[INFO 01-07 10:33:11] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b970&gt;")
+[ERROR 01-07 10:33:11] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b970&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:33:11] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b970&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:33:11] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b970&gt;").
+[INFO 01-07 10:33:11] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:33:11] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b970&gt;").
+[INFO 01-07 10:33:11] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:33:11] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:33:16] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:33:16] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:33:16] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148640&gt;")
+[INFO 01-07 10:33:16] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148640&gt;")
+[ERROR 01-07 10:33:16] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148640&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:33:16] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148640&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:33:16] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148640&gt;").
+[INFO 01-07 10:33:16] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:33:16] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe455148640&gt;").
+[INFO 01-07 10:33:16] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:33:16] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:33:21] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:33:21] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:33:21] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b640&gt;")
+[INFO 01-07 10:33:21] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b640&gt;")
+[ERROR 01-07 10:33:21] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b640&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:33:21] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b640&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:33:21] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b640&gt;").
+[INFO 01-07 10:33:21] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:33:21] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b640&gt;").
+[INFO 01-07 10:33:21] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:33:21] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:33:27] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:33:27] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:33:27] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b430&gt;")
+[INFO 01-07 10:33:27] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b430&gt;")
+[ERROR 01-07 10:33:27] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b430&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:33:27] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b430&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:33:27] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b430&gt;").
+[INFO 01-07 10:33:27] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:33:27] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b430&gt;").
+[INFO 01-07 10:33:27] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:33:27] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:33:32] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:33:32] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:33:32] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514afb0&gt;")
+[INFO 01-07 10:33:32] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514afb0&gt;")
+[ERROR 01-07 10:33:32] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514afb0&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:33:32] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514afb0&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:33:32] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514afb0&gt;").
+[INFO 01-07 10:33:32] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:33:32] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514afb0&gt;").
+[INFO 01-07 10:33:32] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:33:32] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:33:37] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:33:37] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:33:37] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b250&gt;")
+[INFO 01-07 10:33:37] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b250&gt;")
+[ERROR 01-07 10:33:37] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b250&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:33:37] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b250&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:33:37] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b250&gt;").
+[INFO 01-07 10:33:37] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:33:37] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b250&gt;").
+[INFO 01-07 10:33:37] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:33:37] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:33:42] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:33:42] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:33:42] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b460&gt;")
+[INFO 01-07 10:33:42] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b460&gt;")
+[ERROR 01-07 10:33:42] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b460&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:33:42] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b460&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:33:42] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b460&gt;").
+[INFO 01-07 10:33:42] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:33:42] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b460&gt;").
+[INFO 01-07 10:33:42] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:33:42] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:33:47] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:33:47] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:33:47] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aec0&gt;")
+[INFO 01-07 10:33:47] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aec0&gt;")
+[ERROR 01-07 10:33:47] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aec0&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:33:47] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aec0&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:33:47] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aec0&gt;").
+[INFO 01-07 10:33:47] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:33:47] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aec0&gt;").
+[INFO 01-07 10:33:47] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:33:47] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:33:53] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:33:53] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:33:53] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ac80&gt;")
+[INFO 01-07 10:33:53] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ac80&gt;")
+[ERROR 01-07 10:33:53] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ac80&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:33:53] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ac80&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:33:53] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ac80&gt;").
+[INFO 01-07 10:33:53] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:33:53] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ac80&gt;").
+[INFO 01-07 10:33:53] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:33:53] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:33:58] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:33:58] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:33:58] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b7f0&gt;")
+[INFO 01-07 10:33:58] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b7f0&gt;")
+[ERROR 01-07 10:33:58] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b7f0&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:33:58] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b7f0&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:33:58] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b7f0&gt;").
+[INFO 01-07 10:33:58] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:33:58] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b7f0&gt;").
+[INFO 01-07 10:33:58] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:33:58] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:34:03] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:34:03] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:34:03] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ac80&gt;")
+[INFO 01-07 10:34:03] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ac80&gt;")
+[ERROR 01-07 10:34:03] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ac80&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:34:03] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ac80&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:34:03] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ac80&gt;").
+[INFO 01-07 10:34:03] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:34:03] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ac80&gt;").
+[INFO 01-07 10:34:03] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:34:03] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:34:08] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:34:08] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:34:08] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ae90&gt;")
+[INFO 01-07 10:34:08] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ae90&gt;")
+[ERROR 01-07 10:34:08] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ae90&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:34:08] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ae90&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:34:08] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ae90&gt;").
+[INFO 01-07 10:34:08] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:34:08] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ae90&gt;").
+[INFO 01-07 10:34:08] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:34:08] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:34:13] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:34:13] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:34:13] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b0d0&gt;")
+[INFO 01-07 10:34:13] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b0d0&gt;")
+[ERROR 01-07 10:34:13] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b0d0&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:34:13] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b0d0&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:34:13] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b0d0&gt;").
+[INFO 01-07 10:34:13] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:34:13] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b0d0&gt;").
+[INFO 01-07 10:34:13] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:34:13] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:34:19] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:34:19] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:34:19] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b460&gt;")
+[INFO 01-07 10:34:19] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b460&gt;")
+[ERROR 01-07 10:34:19] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b460&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:34:19] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b460&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:34:19] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b460&gt;").
+[INFO 01-07 10:34:19] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:34:19] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b460&gt;").
+[INFO 01-07 10:34:19] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:34:19] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:34:24] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:34:24] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:34:24] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aa40&gt;")
+[INFO 01-07 10:34:24] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aa40&gt;")
+[ERROR 01-07 10:34:24] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aa40&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:34:24] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aa40&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:34:24] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aa40&gt;").
+[INFO 01-07 10:34:24] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:34:24] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aa40&gt;").
+[INFO 01-07 10:34:24] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:34:24] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:34:29] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:34:29] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:34:29] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b010&gt;")
+[INFO 01-07 10:34:29] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b010&gt;")
+[ERROR 01-07 10:34:29] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b010&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:34:29] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b010&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:34:29] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b010&gt;").
+[INFO 01-07 10:34:29] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:34:29] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b010&gt;").
+[INFO 01-07 10:34:29] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:34:29] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:34:34] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:34:34] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:34:34] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ae30&gt;")
+[INFO 01-07 10:34:34] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ae30&gt;")
+[ERROR 01-07 10:34:34] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ae30&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:34:34] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ae30&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:34:34] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ae30&gt;").
+[INFO 01-07 10:34:34] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:34:34] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514ae30&gt;").
+[INFO 01-07 10:34:34] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:34:34] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:34:39] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:34:39] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:34:39] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aa40&gt;")
+[INFO 01-07 10:34:39] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aa40&gt;")
+[ERROR 01-07 10:34:39] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aa40&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:34:39] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aa40&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:34:39] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aa40&gt;").
+[INFO 01-07 10:34:39] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:34:39] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aa40&gt;").
+[INFO 01-07 10:34:39] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:34:39] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:34:44] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:34:44] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:34:44] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b010&gt;")
+[INFO 01-07 10:34:44] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b010&gt;")
+[ERROR 01-07 10:34:44] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b010&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:34:44] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b010&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:34:44] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b010&gt;").
+[INFO 01-07 10:34:44] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:34:44] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b010&gt;").
+[INFO 01-07 10:34:44] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:34:44] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:34:50] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:34:50] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:34:50] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514af20&gt;")
+[INFO 01-07 10:34:50] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514af20&gt;")
+[ERROR 01-07 10:34:50] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514af20&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:34:50] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514af20&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:34:50] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514af20&gt;").
+[INFO 01-07 10:34:50] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:34:50] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514af20&gt;").
+[INFO 01-07 10:34:50] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:34:50] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:34:55] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:34:55] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:34:55] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b250&gt;")
+[INFO 01-07 10:34:55] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b250&gt;")
+[ERROR 01-07 10:34:55] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b250&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:34:55] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b250&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:34:55] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b250&gt;").
+[INFO 01-07 10:34:55] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:34:55] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b250&gt;").
+[INFO 01-07 10:34:55] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:34:55] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:35:00] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:35:00] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:35:00] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b670&gt;")
+[INFO 01-07 10:35:00] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b670&gt;")
+[ERROR 01-07 10:35:00] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b670&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:35:00] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b670&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:35:00] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b670&gt;").
+[INFO 01-07 10:35:00] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:35:00] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514b670&gt;").
+[INFO 01-07 10:35:00] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:35:00] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:35:05] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:35:05] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:35:05] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514a530&gt;")
+[INFO 01-07 10:35:05] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514a530&gt;")
+[ERROR 01-07 10:35:05] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514a530&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:35:05] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514a530&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:35:05] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514a530&gt;").
+[INFO 01-07 10:35:05] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:35:05] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514a530&gt;").
+[INFO 01-07 10:35:05] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:35:05] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:35:10] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:35:10] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:35:10] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514a710&gt;")
+[INFO 01-07 10:35:10] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514a710&gt;")
+[ERROR 01-07 10:35:10] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514a710&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:35:10] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514a710&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:35:10] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514a710&gt;").
+[INFO 01-07 10:35:10] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:35:10] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514a710&gt;").
+[INFO 01-07 10:35:10] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:35:10] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:35:15] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:35:15] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:35:15] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aaa0&gt;")
+[INFO 01-07 10:35:15] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aaa0&gt;")
+[ERROR 01-07 10:35:15] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aaa0&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:35:15] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aaa0&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:35:15] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aaa0&gt;").
+[INFO 01-07 10:35:15] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:35:15] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514aaa0&gt;").
+[INFO 01-07 10:35:15] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:35:15] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:35:20] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:35:20] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+[INFO 01-07 10:35:20] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514a530&gt;")
+[INFO 01-07 10:35:20] ax.core.metric: MetricFetchE INFO: Initialized MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514a530&gt;")
+[ERROR 01-07 10:35:20] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514a530&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[ERROR 01-07 10:35:20] ax.core.experiment: Discovered Metric fetching Err while attaching data MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514a530&gt;"). Ignoring for now -- will retry query on next call to fetch.
+[WARNING 01-07 10:35:20] Scheduler: Failed to fetch val_acc for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514a530&gt;").
+[INFO 01-07 10:35:20] Scheduler: MetricFetchE INFO: Because val_acc is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[WARNING 01-07 10:35:20] Scheduler: Failed to fetch num_params for trial 0, found MetricFetchE(message="No 'scalar' data found for trial in multiplexer mul=&lt;tensorboard.backend.event_processing.plugin_event_multiplexer.EventMultiplexer object at 0x7fe45514a530&gt;").
+[INFO 01-07 10:35:20] Scheduler: MetricFetchE INFO: Because num_params is available_while_running and trial 0 is still RUNNING continuing the experiment and retrying on next poll...
+[INFO 01-07 10:35:20] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:35:25] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:35:25] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+/home/jbris/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/core/map_data.py:195: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  df = pd.concat(
+[INFO 01-07 10:35:40] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:35:45] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:35:45] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+/home/jbris/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/core/map_data.py:195: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  df = pd.concat(
+[INFO 01-07 10:35:45] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:35:50] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:35:50] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+/home/jbris/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/core/map_data.py:195: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  df = pd.concat(
+[INFO 01-07 10:35:50] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:35:56] Scheduler: Fetching data for newly completed trials: [].
+[INFO 01-07 10:35:56] Scheduler: Fetching data for trials: [0] because some metrics on experiment are available while trials are running.
+/home/jbris/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/core/map_data.py:195: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  df = pd.concat(
+[INFO 01-07 10:35:56] Scheduler: Waiting for completed trials (for 5 sec, currently running trials: 1).
+[INFO 01-07 10:36:20] Scheduler: Fetching data for newly completed trials: [0].
+[INFO 01-07 10:36:20] Scheduler: Retrieved COMPLETED trials: [0].
+/home/jbris/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/core/map_data.py:195: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  df = pd.concat(
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[84]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[76]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>OptimizationResult()</pre>
 </div>
@@ -7885,7 +8310,7 @@ The behavior of DataFrame concatenation with empty or all-NA entries is deprecat
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [85]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [77]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">ax.service.utils.report_utils</span> <span class="kn">import</span> <span class="n">exp_to_df</span>
@@ -7904,16 +8329,14 @@ The behavior of DataFrame concatenation with empty or all-NA entries is deprecat
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>/home/jbris/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/core/map_data.py:195: FutureWarning:
-
-The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
-
-[WARNING 01-07 02:10:23] ax.service.utils.report_utils: Column reason missing for all trials. Not appending column.
+<pre>/home/jbris/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/core/map_data.py:195: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  df = pd.concat(
+[WARNING 01-07 10:36:21] ax.service.utils.report_utils: Column reason missing for all trials. Not appending column.
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[85]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[77]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -7943,7 +8366,6 @@ The behavior of DataFrame concatenation with empty or all-NA entries is deprecat
 <th>hidden_size_1</th>
 <th>hidden_size_2</th>
 <th>learning_rate</th>
-<th>epochs</th>
 <th>dropout</th>
 <th>batch_size</th>
 </tr>
@@ -7956,78 +8378,13 @@ The behavior of DataFrame concatenation with empty or all-NA entries is deprecat
 <td>COMPLETED</td>
 <td>Sobol</td>
 <td>False</td>
-<td>51630.5</td>
-<td>0.930153</td>
-<td>24</td>
-<td>55</td>
-<td>0.000283</td>
+<td>3192.0</td>
+<td>0.09776</td>
 <td>4</td>
-<td>0.223872</td>
-<td>256</td>
-</tr>
-<tr>
-<th>1</th>
-<td>1</td>
-<td>1_0</td>
-<td>COMPLETED</td>
-<td>Sobol</td>
-<td>False</td>
-<td>81540.0</td>
-<td>0.951953</td>
-<td>99</td>
-<td>36</td>
-<td>0.002042</td>
-<td>2</td>
-<td>0.346836</td>
-<td>64</td>
-</tr>
-<tr>
-<th>2</th>
-<td>2</td>
-<td>2_0</td>
-<td>COMPLETED</td>
-<td>Sobol</td>
-<td>True</td>
-<td>64812.0</td>
-<td>0.949193</td>
-<td>72</td>
-<td>102</td>
-<td>0.000512</td>
-<td>3</td>
-<td>0.406327</td>
+<td>4</td>
+<td>0.089042</td>
+<td>0.452861</td>
 <td>32</td>
-</tr>
-<tr>
-<th>3</th>
-<td>3</td>
-<td>3_0</td>
-<td>COMPLETED</td>
-<td>Sobol</td>
-<td>True</td>
-<td>30704.0</td>
-<td>0.940087</td>
-<td>38</td>
-<td>19</td>
-<td>0.003452</td>
-<td>1</td>
-<td>0.037118</td>
-<td>128</td>
-</tr>
-<tr>
-<th>4</th>
-<td>4</td>
-<td>4_0</td>
-<td>COMPLETED</td>
-<td>Sobol</td>
-<td>False</td>
-<td>26363.0</td>
-<td>0.921504</td>
-<td>29</td>
-<td>93</td>
-<td>0.001170</td>
-<td>1</td>
-<td>0.103638</td>
-<td>256</td>
 </tr>
 </tbody>
 </table>
@@ -8041,7 +8398,7 @@ The behavior of DataFrame concatenation with empty or all-NA entries is deprecat
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [86]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [78]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">ax.service.utils.report_utils</span> <span class="kn">import</span> <span class="n">_pareto_frontier_scatter_2d_plotly</span>
@@ -8059,42 +8416,83 @@ The behavior of DataFrame concatenation with empty or all-NA entries is deprecat
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>/home/jbris/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/core/map_data.py:195: FutureWarning:
-
-The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
-
-[WARNING 01-07 02:10:23] ax.service.utils.report_utils: Column reason missing for all trials. Not appending column.
+<pre>/home/jbris/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/core/map_data.py:195: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  df = pd.concat(
+[WARNING 01-07 10:39:35] ax.service.utils.report_utils: Column reason missing for all trials. Not appending column.
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<div> <div class="plotly-graph-div" id="93f8c941-ee42-4a4b-915f-1a1acdc0c469" style="height:525px; width:100%;"></div> <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("93f8c941-ee42-4a4b-915f-1a1acdc0c469")) {                    Plotly.newPlot(                        "93f8c941-ee42-4a4b-915f-1a1acdc0c469",                        [{"line":{"shape":"hv"},"marker":{"color":"rgba(128,177,211,1)"},"mode":"lines","x":[0.9491930603981018,0.9491930603981018,0.9400865435600281,0.94],"y":[80000.0,64812.0,30704.0,30704.0],"type":"scatter"},{"marker":{"color":"rgba(128,177,211,1)"},"mode":"lines","x":[0.9491930603981018,0.94],"y":[80000,80000],"type":"scatter"},{"marker":{"color":"rgba(128,177,211,1)"},"mode":"lines","x":[0.94,0.94],"y":[30704.0,80000],"type":"scatter"},{"hovertemplate":"%{text}","marker":{"color":[0.0,25.0,50.0,75.0,100.0],"colorbar":{"ticktext":[1,"iteration",5],"tickvals":[0,50,100]},"colorscale":[[0.0,"#000004"],[0.1111111111111111,"#180f3d"],[0.2222222222222222,"#440f76"],[0.3333333333333333,"#721f81"],[0.4444444444444444,"#9e2f7f"],[0.5555555555555556,"#cd4071"],[0.6666666666666666,"#f1605d"],[0.7777777777777778,"#fd9668"],[0.8888888888888888,"#feca8d"],[1.0,"#fcfdbf"]]},"mode":"markers","name":"Experimental points","text":["Arm name: 0_0","Arm name: 1_0","Arm name: 2_0","Arm name: 3_0","Arm name: 4_0"],"x":[0.9301530718803406,0.9519532322883606,0.9491930603981018,0.9400865435600281,0.9215035438537598],"y":[51630.5,81540.0,64812.0,30704.0,26363.0],"type":"scatter"},{"marker":{"color":"rgba(128,177,211,1)","size":25,"symbol":"star"},"mode":"markers","x":[0.94],"y":[80000],"type":"scatter"}],                        {"showlegend":false,"title":{"text":"Observed metric values with Pareto frontier"},"xaxis":{"range":[0.9390806939601898,0.950112366437912],"title":{"text":"val_acc"}},"yaxis":{"range":[25774.4,84929.6],"title":{"text":"num_params"}},"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}}},                        {"responsive": true}                    ).then(function(){
-                            
-var gd = document.getElementById('93f8c941-ee42-4a4b-915f-1a1acdc0c469');
-var x = new MutationObserver(function (mutations, observer) {{
-        var display = window.getComputedStyle(gd).display;
-        if (!display || display === 'none') {{
-            console.log([gd, 'removed!']);
-            Plotly.purge(gd);
-            observer.disconnect();
-        }}
-}});
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[78], line 3</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">ax</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">service</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">utils</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">report_utils</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> _pareto_frontier_scatter_2d_plotly
+<span class="ansi-green-fg">----&gt; 3</span> <span class="ansi-yellow-bg">_pareto_frontier_scatter_2d_plotly</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">experiment</span><span class="ansi-yellow-bg">)</span>
 
-// Listen for the removal of the full notebook cells
-var notebookContainer = gd.closest('#notebook-container');
-if (notebookContainer) {{
-    x.observe(notebookContainer, {childList: true});
-}}
+File <span class="ansi-green-fg">~/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/service/utils/report_utils.py:1089</span>, in <span class="ansi-cyan-fg">_pareto_frontier_scatter_2d_plotly</span><span class="ansi-blue-fg">(experiment, metric_names, reference_point, minimize)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1074</span> <span class="ansi-bold" style="color: rgb(0,135,0)">def</span> <span style="color: rgb(0,0,255)">_pareto_frontier_scatter_2d_plotly</span>(
+<span class="ansi-green-intense-fg ansi-bold">   1075</span>     experiment: Experiment,
+<span class="ansi-green-intense-fg ansi-bold">   1076</span>     metric_names: Optional[<span style="color: rgb(0,135,0)">tuple</span>[<span style="color: rgb(0,135,0)">str</span>, <span style="color: rgb(0,135,0)">str</span>]] <span style="color: rgb(98,98,98)">=</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1080</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1081</span>     <span style="color: rgb(95,135,135)"># Determine defaults for unspecified inputs using `optimization_config`</span>
+<span class="ansi-green-intense-fg ansi-bold">   1082</span>     metric_names, reference_point, minimize <span style="color: rgb(98,98,98)">=</span> _pareto_frontier_plot_input_processing(
+<span class="ansi-green-intense-fg ansi-bold">   1083</span>         experiment<span style="color: rgb(98,98,98)">=</span>experiment,
+<span class="ansi-green-intense-fg ansi-bold">   1084</span>         metric_names<span style="color: rgb(98,98,98)">=</span>metric_names,
+<span class="ansi-green-intense-fg ansi-bold">   1085</span>         reference_point<span style="color: rgb(98,98,98)">=</span>reference_point,
+<span class="ansi-green-intense-fg ansi-bold">   1086</span>         minimize<span style="color: rgb(98,98,98)">=</span>minimize,
+<span class="ansi-green-intense-fg ansi-bold">   1087</span>     )
+<span class="ansi-green-fg">-&gt; 1089</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">pareto_frontier_scatter_2d_plotly</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-intense-fg ansi-bold">   1090</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">experiment</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">metric_names</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">reference_point</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">minimize</span>
+<span class="ansi-green-intense-fg ansi-bold">   1091</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">)</span>
 
-// Listen for the clearing of the current output cell
-var outputEl = gd.closest('.output');
-if (outputEl) {{
-    x.observe(outputEl, {childList: true});
-}}
+File <span class="ansi-green-fg">~/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/service/utils/report_utils.py:1113</span>, in <span class="ansi-cyan-fg">pareto_frontier_scatter_2d_plotly</span><span class="ansi-blue-fg">(experiment, metric_names, reference_point, minimize)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1103</span> Y_pareto <span style="color: rgb(98,98,98)">=</span> (
+<span class="ansi-green-intense-fg ansi-bold">   1104</span>     _extract_observed_pareto_2d(
+<span class="ansi-green-intense-fg ansi-bold">   1105</span>         Y<span style="color: rgb(98,98,98)">=</span>Y, reference_point<span style="color: rgb(98,98,98)">=</span>reference_point, minimize<span style="color: rgb(98,98,98)">=</span>minimize
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1108</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">else</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>
+<span class="ansi-green-intense-fg ansi-bold">   1109</span> )
+<span class="ansi-green-intense-fg ansi-bold">   1111</span> hovertext <span style="color: rgb(98,98,98)">=</span> [<span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Arm name: </span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>arm_name<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)">"</span> <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> arm_name <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> df[<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">arm_name</span><span style="color: rgb(175,0,0)">"</span>]]
+<span class="ansi-green-fg">-&gt; 1113</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">scatter_plot_with_pareto_frontier_plotly</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-intense-fg ansi-bold">   1114</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">Y</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">Y</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">   1115</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">Y_pareto</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">Y_pareto</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">   1116</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">metric_x</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">metric_names</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">0</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">   1117</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">metric_y</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">metric_names</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">1</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">   1118</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">reference_point</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">reference_point</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">   1119</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">minimize</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">minimize</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">   1120</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">hovertext</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">hovertext</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">   1121</span> <span class="ansi-yellow-bg">)</span>
 
-                        })                };                });            </script> </div>
+File <span class="ansi-green-fg">~/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/plot/pareto_frontier.py:147</span>, in <span class="ansi-cyan-fg">scatter_plot_with_pareto_frontier_plotly</span><span class="ansi-blue-fg">(Y, Y_pareto, metric_x, metric_y, reference_point, minimize, hovertext)</span>
+<span class="ansi-green-intense-fg ansi-bold">    139</span> <span style="color: rgb(95,135,135)"># No Pareto frontier is drawn if none is provided, or if the frontier consists of</span>
+<span class="ansi-green-intense-fg ansi-bold">    140</span> <span style="color: rgb(95,135,135)"># a single point and no reference points are provided.</span>
+<span class="ansi-green-intense-fg ansi-bold">    141</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> (
+<span class="ansi-green-intense-fg ansi-bold">    142</span>     Y_pareto <span class="ansi-bold" style="color: rgb(175,0,255)">is</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>
+<span class="ansi-green-intense-fg ansi-bold">    143</span>     <span class="ansi-bold" style="color: rgb(175,0,255)">or</span> <span style="color: rgb(0,135,0)">len</span>(Y_pareto) <span style="color: rgb(98,98,98)">==</span> <span style="color: rgb(98,98,98)">0</span>
+<span class="ansi-green-intense-fg ansi-bold">    144</span>     <span class="ansi-bold" style="color: rgb(175,0,255)">or</span> (<span style="color: rgb(0,135,0)">len</span>(Y_pareto) <span style="color: rgb(98,98,98)">==</span> <span style="color: rgb(98,98,98)">1</span> <span class="ansi-bold" style="color: rgb(175,0,255)">and</span> reference_point <span class="ansi-bold" style="color: rgb(175,0,255)">is</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>)
+<span class="ansi-green-intense-fg ansi-bold">    145</span> ):
+<span class="ansi-green-intense-fg ansi-bold">    146</span>     <span style="color: rgb(95,135,135)"># `Y_pareto` input was not specified</span>
+<span class="ansi-green-fg">--&gt; 147</span>     range_x <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">extend_range</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">lower</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">min</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">Y</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg">:</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">0</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">upper</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">max</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">Y</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg">:</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">0</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    148</span>     range_y <span style="color: rgb(98,98,98)">=</span> extend_range(lower<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(0,135,0)">min</span>(Y[:, <span style="color: rgb(98,98,98)">1</span>]), upper<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(0,135,0)">max</span>(Y[:, <span style="color: rgb(98,98,98)">1</span>]))
+<span class="ansi-green-intense-fg ansi-bold">    149</span>     pareto_step <span style="color: rgb(98,98,98)">=</span> reference_point_lines <span style="color: rgb(98,98,98)">=</span> reference_point_star <span style="color: rgb(98,98,98)">=</span> []
+
+File <span class="ansi-green-fg">~/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/plot/helper.py:46</span>, in <span class="ansi-cyan-fg">extend_range</span><span class="ansi-blue-fg">(lower, upper, percent, log_scale)</span>
+<span class="ansi-green-intense-fg ansi-bold">     41</span> <span style="color: rgb(175,0,0)">"""Given a range of minimum and maximum values taken by values on a given axis,</span>
+<span class="ansi-green-intense-fg ansi-bold">     42</span> <span style="color: rgb(175,0,0)">extend it in both directions by a given percentage to have some margin within</span>
+<span class="ansi-green-intense-fg ansi-bold">     43</span> <span style="color: rgb(175,0,0)">the plot around its meaningful part.</span>
+<span class="ansi-green-intense-fg ansi-bold">     44</span> <span style="color: rgb(175,0,0)">"""</span>
+<span class="ansi-green-intense-fg ansi-bold">     45</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> upper <span style="color: rgb(98,98,98)">&lt;</span><span style="color: rgb(98,98,98)">=</span> lower:
+<span class="ansi-green-fg">---&gt; 46</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> <span class="ansi-bold" style="color: rgb(215,95,95)">ValueError</span>(
+<span class="ansi-green-intense-fg ansi-bold">     47</span>         <span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">`upper` should be greater than `lower`, got: </span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>upper<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)"> (&lt;= </span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>lower<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)">).</span><span style="color: rgb(175,0,0)">"</span>
+<span class="ansi-green-intense-fg ansi-bold">     48</span>     )
+<span class="ansi-green-intense-fg ansi-bold">     50</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> log_scale:
+<span class="ansi-green-intense-fg ansi-bold">     51</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> <span class="ansi-bold" style="color: rgb(215,95,95)">NotImplementedError</span>(<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Log scale not yet supported.</span><span style="color: rgb(175,0,0)">"</span>)
+
+<span class="ansi-red-fg">ValueError</span>: `upper` should be greater than `lower`, got: 0.09776025265455246 (&lt;= 0.09776025265455246).</pre>
 </div>
 </div>
 </div>
@@ -8104,7 +8502,7 @@ if (outputEl) {{
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [87]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [79]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">ax.modelbridge.cross_validation</span> <span class="kn">import</span> <span class="n">compute_diagnostics</span><span class="p">,</span> <span class="n">cross_validate</span>
@@ -8129,63 +8527,25 @@ if (outputEl) {{
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NotImplementedError</span>                       Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[87], line 5</span>
+<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[79], line 5</span>
 <span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">ax</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">plot</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">diagnostic</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> interact_cross_validation_plotly
 <span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">ax</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">utils</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">notebook</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">plotting</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> init_notebook_plotting, render
 <span class="ansi-green-fg">----&gt; 5</span> cv <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">cross_validate</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">model</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">gs</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">model</span><span class="ansi-yellow-bg">)</span>  <span style="color: rgb(95,135,135)"># The surrogate model is stored on the ``GenerationStrategy``</span>
 <span class="ansi-green-intense-fg ansi-bold">      6</span> compute_diagnostics(cv)
 <span class="ansi-green-intense-fg ansi-bold">      8</span> interact_cross_validation_plotly(cv)
 
-File <span class="ansi-green-fg">~/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/modelbridge/cross_validation.py:167</span>, in <span class="ansi-cyan-fg">cross_validate</span><span class="ansi-blue-fg">(model, folds, test_selector, untransform, use_posterior_predictive)</span>
-<span class="ansi-green-intense-fg ansi-bold">    165</span> <span style="color: rgb(95,135,135)"># Make the prediction</span>
-<span class="ansi-green-intense-fg ansi-bold">    166</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> untransform:
-<span class="ansi-green-fg">--&gt; 167</span>     cv_test_predictions <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">model</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">cross_validate</span><span class="ansi-yellow-bg">(</span>
-<span class="ansi-green-intense-fg ansi-bold">    168</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">cv_training_data</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">cv_training_data</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    169</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">cv_test_points</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">cv_test_points</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    170</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">use_posterior_predictive</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">use_posterior_predictive</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    171</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    172</span> <span class="ansi-bold" style="color: rgb(0,135,0)">else</span>:
-<span class="ansi-green-intense-fg ansi-bold">    173</span>     <span style="color: rgb(95,135,135)"># Get test predictions in transformed space</span>
-<span class="ansi-green-intense-fg ansi-bold">    174</span>     (
-<span class="ansi-green-intense-fg ansi-bold">    175</span>         cv_training_data,
-<span class="ansi-green-intense-fg ansi-bold">    176</span>         cv_test_points,
-<span class="ansi-green-fg">   (...)</span>
-<span class="ansi-green-intense-fg ansi-bold">    179</span>         cv_training_data<span style="color: rgb(98,98,98)">=</span>cv_training_data, cv_test_points<span style="color: rgb(98,98,98)">=</span>cv_test_points
-<span class="ansi-green-intense-fg ansi-bold">    180</span>     )
+File <span class="ansi-green-fg">~/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/modelbridge/cross_validation.py:132</span>, in <span class="ansi-cyan-fg">cross_validate</span><span class="ansi-blue-fg">(model, folds, test_selector, untransform, use_posterior_predictive)</span>
+<span class="ansi-green-intense-fg ansi-bold">    130</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> <span class="ansi-bold" style="color: rgb(215,95,95)">ValueError</span>(<span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Training data only has </span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>n<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)"> arms, which is less than folds</span><span style="color: rgb(175,0,0)">"</span>)
+<span class="ansi-green-intense-fg ansi-bold">    131</span> <span class="ansi-bold" style="color: rgb(0,135,0)">elif</span> n <span style="color: rgb(98,98,98)">==</span> <span style="color: rgb(98,98,98)">0</span>:
+<span class="ansi-green-fg">--&gt; 132</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> <span class="ansi-bold" style="color: rgb(215,95,95)">ValueError</span>(
+<span class="ansi-green-intense-fg ansi-bold">    133</span>         <span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>model<span style="color: rgb(98,98,98)">.</span><span style="color: rgb(0,0,135)">__class__</span><span style="color: rgb(98,98,98)">.</span><span style="color: rgb(0,0,135)">__name__</span><span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)"> has no training data.  Either it has been </span><span style="color: rgb(175,0,0)">"</span>
+<span class="ansi-green-intense-fg ansi-bold">    134</span>         <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">incorrectly initialized or should not be cross validated.</span><span style="color: rgb(175,0,0)">"</span>
+<span class="ansi-green-intense-fg ansi-bold">    135</span>     )
+<span class="ansi-green-intense-fg ansi-bold">    136</span> <span class="ansi-bold" style="color: rgb(0,135,0)">elif</span> folds <span style="color: rgb(98,98,98)">&lt;</span> <span style="color: rgb(98,98,98)">2</span> <span class="ansi-bold" style="color: rgb(175,0,255)">and</span> folds <span style="color: rgb(98,98,98)">!=</span> <span style="color: rgb(98,98,98)">-</span><span style="color: rgb(98,98,98)">1</span>:
+<span class="ansi-green-intense-fg ansi-bold">    137</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> <span class="ansi-bold" style="color: rgb(215,95,95)">ValueError</span>(<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Folds must be -1 for LOO, or &gt; 1.</span><span style="color: rgb(175,0,0)">"</span>)
 
-File <span class="ansi-green-fg">~/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/modelbridge/base.py:910</span>, in <span class="ansi-cyan-fg">ModelBridge.cross_validate</span><span class="ansi-blue-fg">(self, cv_training_data, cv_test_points, use_posterior_predictive)</span>
-<span class="ansi-green-intense-fg ansi-bold">    901</span> <span class="ansi-bold" style="color: rgb(0,135,0)">with</span> warnings<span style="color: rgb(98,98,98)">.</span>catch_warnings():
-<span class="ansi-green-intense-fg ansi-bold">    902</span>     <span style="color: rgb(95,135,135)"># Since each CV fold removes points from the training data, the remaining</span>
-<span class="ansi-green-intense-fg ansi-bold">    903</span>     <span style="color: rgb(95,135,135)"># observations will not pass the standardization test. To avoid confusing</span>
-<span class="ansi-green-intense-fg ansi-bold">    904</span>     <span style="color: rgb(95,135,135)"># users with this warning, we filter it out.</span>
-<span class="ansi-green-intense-fg ansi-bold">    905</span>     warnings<span style="color: rgb(98,98,98)">.</span>filterwarnings(
-<span class="ansi-green-intense-fg ansi-bold">    906</span>         <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">ignore</span><span style="color: rgb(175,0,0)">"</span>,
-<span class="ansi-green-intense-fg ansi-bold">    907</span>         message<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">r</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Data </span><span style="color: rgb(175,0,0)">\</span><span style="color: rgb(175,0,0)">(outcome observations</span><span style="color: rgb(175,0,0)">\</span><span style="color: rgb(175,0,0)">) is not standardized</span><span style="color: rgb(175,0,0)">"</span>,
-<span class="ansi-green-intense-fg ansi-bold">    908</span>         category<span style="color: rgb(98,98,98)">=</span>InputDataWarning,
-<span class="ansi-green-intense-fg ansi-bold">    909</span>     )
-<span class="ansi-green-fg">--&gt; 910</span>     cv_predictions <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">_cross_validate</span><span class="ansi-yellow-bg">(</span>
-<span class="ansi-green-intense-fg ansi-bold">    911</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">search_space</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">search_space</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    912</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">cv_training_data</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">cv_training_data</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    913</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">cv_test_points</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">cv_test_points</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    914</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">use_posterior_predictive</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">use_posterior_predictive</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    915</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    916</span> <span style="color: rgb(95,135,135)"># Apply reverse transforms, in reverse order</span>
-<span class="ansi-green-intense-fg ansi-bold">    917</span> cv_test_observations <span style="color: rgb(98,98,98)">=</span> [
-<span class="ansi-green-intense-fg ansi-bold">    918</span>     Observation(features<span style="color: rgb(98,98,98)">=</span>obsf, data<span style="color: rgb(98,98,98)">=</span>cv_predictions[i])
-<span class="ansi-green-intense-fg ansi-bold">    919</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> i, obsf <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> <span style="color: rgb(0,135,0)">enumerate</span>(cv_test_points)
-<span class="ansi-green-intense-fg ansi-bold">    920</span> ]
-
-File <span class="ansi-green-fg">~/.cache/pypoetry/virtualenvs/aws-botorch-torchx-087hCjDl-py3.10/lib/python3.10/site-packages/ax/modelbridge/random.py:105</span>, in <span class="ansi-cyan-fg">RandomModelBridge._cross_validate</span><span class="ansi-blue-fg">(self, search_space, cv_training_data, cv_test_points, use_posterior_predictive)</span>
-<span class="ansi-green-intense-fg ansi-bold">     98</span> <span class="ansi-bold" style="color: rgb(0,135,0)">def</span> <span style="color: rgb(0,0,255)">_cross_validate</span>(
-<span class="ansi-green-intense-fg ansi-bold">     99</span>     <span style="color: rgb(0,135,0)">self</span>,
-<span class="ansi-green-intense-fg ansi-bold">    100</span>     search_space: SearchSpace,
-<span class="ansi-green-fg">   (...)</span>
-<span class="ansi-green-intense-fg ansi-bold">    103</span>     use_posterior_predictive: <span style="color: rgb(0,135,0)">bool</span> <span style="color: rgb(98,98,98)">=</span> <span class="ansi-bold" style="color: rgb(0,135,0)">False</span>,
-<span class="ansi-green-intense-fg ansi-bold">    104</span> ) <span style="color: rgb(98,98,98)">-</span><span style="color: rgb(98,98,98)">&gt;</span> <span style="color: rgb(0,135,0)">list</span>[ObservationData]:
-<span class="ansi-green-fg">--&gt; 105</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> <span class="ansi-bold" style="color: rgb(215,95,95)">NotImplementedError</span>
-
-<span class="ansi-red-fg">NotImplementedError</span>: </pre>
+<span class="ansi-red-fg">ValueError</span>: RandomModelBridge has no training data.  Either it has been incorrectly initialized or should not be cross validated.</pre>
 </div>
 </div>
 </div>
@@ -8215,6 +8575,20 @@ File <span class="ansi-green-fg">~/.cache/pypoetry/virtualenvs/aws-botorch-torch
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">interact_contour_plotly</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">gs</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">metric_name</span><span class="o">=</span><span class="s2">"num_params"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5fa6384c-5792-4694-946c-913a356ddfc1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>
